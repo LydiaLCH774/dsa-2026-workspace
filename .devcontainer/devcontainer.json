@@ -8,7 +8,9 @@
           "**/.devcontainer": true,
           "**/.gitignore": true
         },
-        "explorer.autoOpenDroppedFile": false
+        "explorer.autoOpenDroppedFile": false,
+        "workbench.editor.centeredLayout": true,
+        "workbench.editor.centeredLayoutAutoResize": false
       },
       "extensions": [
         "ms-python.python",

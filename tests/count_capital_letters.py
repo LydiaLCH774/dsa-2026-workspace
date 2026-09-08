@@ -1,15 +1,15 @@
 test = {
-  'name': 'sum_up_to',
-  'points': 10,
+  'name': 'count_capital_letters',
+  'points': 8,
   'suites': [
     {
       'cases': [
         {
           'code': r"""
-          >>> sum_up_to(1)
-          1
-          >>> sum_up_to(5)
-          15
+          >>> count_capital_letters(['HEY YOU', 'date1', 100, 10, 'id'])
+          6
+          >>> count_capital_letters(['hey YOU', 'date1', 100, 10, 'id'])
+          3
           """,
           'hidden': False,
           'locked': False
@@ -17,7 +17,7 @@ test = {
       ],
       'scored': True,
       'setup': r"""
-      >>> from algo_extra import *
+      >>> from seq_data_extra import *
       """,
       'teardown': '',
       'type': 'doctest'

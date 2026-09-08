@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>algo</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script><script type="module">
+<title>seq_data</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script><script type="module">
   import mermaid from 'https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.0/mermaid.esm.min.mjs';
   
   mermaid.initialize({ startOnLoad: true });
@@ -13091,701 +13091,1140 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Algorithms-and-functions">Algorithms and functions<a class="anchor-link" href="#Algorithms-and-functions">¶</a></h1><p><em>Data Structures and Algorithms</em></p>
+<h1 id="Sequential-data">Sequential data<a class="anchor-link" href="#Sequential-data">¶</a></h1><p><em>Data Structures and Algorithms</em></p>
 <p><em>Imperial College Business School</em></p>
 <hr/>
-<p>In this session, we will learn to build our first algorithms and organize our code into building blocks using <em>functions</em>.</p>
+<p>So far, the data we have seen has been simple numbers and strings. In this session, we will learn to work with compound data using <em>lists</em>. We will also use <em>for loops</em> to loop through such sequences, and work more on functions, specifically <em>methods</em> associated with data types like lists and strings.</p>
 <hr/>
 <blockquote>
-<h2 id="Preparation">Preparation<a class="anchor-link" href="#Preparation">¶</a></h2><p><em><strong>Readings:</strong></em></p>
-<p>Guttag: Chapter 4.</p>
-<p><em><strong>OR</strong></em></p>
+<h2 id="Preparation">Preparation<a class="anchor-link" href="#Preparation">¶</a></h2><p><strong>Readings</strong>:</p>
+<p>Guttag: Chapters 2.6, 5.1-5.5.</p>
+<p><strong>OR</strong></p>
 <p>Sweigart, Al. Automate the Boring Stuff with Python.</p>
 <ul>
-<li>Functions <a href="https://automatetheboringstuff.com/3e/">https://automatetheboringstuff.com/3e/</a></li>
-</ul>
-<p><em><strong>Further Readings:</strong></em></p>
-<p>Ford, Paul. What is code?</p>
-<ul>
-<li><a href="https://www.bloomberg.com/graphics/2015-paul-ford-what-is-code/">https://www.bloomberg.com/graphics/2015-paul-ford-what-is-code/</a></li>
+<li>Chapters 2, 6 – Control flow, Lists <a href="https://automatetheboringstuff.com/3e/">https://automatetheboringstuff.com/3e/</a></li>
 </ul>
 <p><strong>Questions:</strong></p>
-<p>Please go through the readings and think about how you would explain to your classmates:</p>
+<p>Please read the material above, and think about how you would explain to your classmates:</p>
 <ul>
-<li>What is a function?</li>
-<li>Why do we use functions?</li>
-<li>What is the difference between "defining" and "calling" a function?</li>
+<li>How does a <code>for</code> loop differ from a <code>while</code> loop?</li>
+<li>What does the <code>range</code> function do?</li>
+<li>A Python <code>list</code> is an <em>ordered</em>, <em>mutable</em> data <em>collection</em> with
+many <em>built-in methods</em>. What do we mean by these terms?</li>
 </ul>
 </blockquote>
 <hr/>
+<p>You'll work through a series of Python exercises.</p>
+<ul>
+<li>If you get stuck on a question, ask a TA or Reza.</li>
+<li>We encourage you to work together on the exercises.</li>
+</ul>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Questions 1 - 9 make up the full session.</li>
+<h2 id="Starting-out">Starting out<a class="anchor-link" href="#Starting-out">¶</a></h2><ul>
+<li>Questions 1 - 10 make up the full session.</li>
 </ul>
-<h2 id="Using-OK">Using OK<a class="anchor-link" href="#Using-OK">¶</a></h2><p>We use a program called OK for code feedback. You should have OK set up already (see the Getting Started tutorial). The session will include instructions for running <code>ok</code> commands as we need them.</p>
+<h3 id="Using-OK">Using OK<a class="anchor-link" href="#Using-OK">¶</a></h3><p>As in the previous sessions, we will use a program called <code>ok</code> to test our code.</p>
+<p>You should have OK set up already (see the Getting Started tutorial). The session will include instructions for running <code>ok</code> commands as we need them.</p>
 <p>For help with running <code>ok</code>, you can run</p>
 <pre><code>python ok -h
 </code></pre>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Recap">Recap<a class="anchor-link" href="#Recap">¶</a></h2><p>In Session 1, we learned how to execute statements such as arithmetic operations, store the values of our calculations, and use conditional statements to make decisions in our programs.</p>
-<h3 id="Question-1:-Recap">Question 1: Recap<a class="anchor-link" href="#Question-1:-Recap">¶</a></h3><p>Navigate to the command-line <strong>terminal</strong> in VS Code. You should be in the default directory, which contains the contents of the session including this file. You can check the current directory with <code>pwd</code> (for print working directory). You can check the contents of the current directory with <code>ls</code>.</p>
-<p>Then, use the command</p>
+<h2 id="Recap">Recap<a class="anchor-link" href="#Recap">¶</a></h2><p>Let's first recap some of the things we have learned.</p>
+<h3 id="Question-1:-Recap">Question 1: Recap<a class="anchor-link" href="#Question-1:-Recap">¶</a></h3><p>Use the command</p>
 <pre><code>python ok -q q1 -u
 </code></pre>
-<p>to start the first exercise.</p>
+<p>on the command line to start the first exercise.</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Functions">Functions<a class="anchor-link" href="#Functions">¶</a></h2>
+<h2 id="For-loops-and-range(-)">For loops and range( )<a class="anchor-link" href="#For-loops-and-range(-)">¶</a></h2><p>We have previously started building algorithms based on repetition with <code>while</code> loops. For example, we might want to print the squared values of all integers from 0 to 4.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">number</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">number</span> <span class="o">&lt;=</span> <span class="mi">4</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">number</span><span class="o">*</span><span class="n">number</span><span class="p">)</span>
+    <span class="n">number</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We've now introduced many key structures of programming: calculations, variable assignment, conditions, and loop structures. These are enough for us to start solving computational problems, but before we do, let us introduce another useful concept: functions.</p>
+<p>Here we have to be careful to remember to increase the value of <code>number</code> at every iteration - otherwise the while loop will continue running forever. But is there an easier way of solving the same problem?</p>
+<p>When we know that we want to iterate over a specific sequence of items, such as the integers from 0 through 4, we often want to use another repetition structure instead, a <em>for loop</em>. Here's the for loop for solving the same problem:</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We use algorithms all the time in our everyday lives, and often trust someone else or a service to do so for us. For example, we give a destination to a mapping service, and get the shortest route. Or we call up an order to a restaurant, and get a fresh pizza. There is a "map algorithm" or "pizza algorithm" behind the scenes, but we don't know exactly how it works - we simply trust others to have designed it such that it works.</p>
-<p>Similarly, in Python, we have started using code that others have written and we trust to work. In the first session, we used the commands like:</p>
-<div class="highlight"><pre><span></span><span class="nb">abs</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span>
-<span class="nb">max</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">number</span><span class="o">*</span><span class="n">number</span><span class="p">)</span>
 </pre></div>
-<p>to calculate the absolute value of a number and the maximum of two numbers. <code>abs</code> and <code>max</code> are called <em>functions</em>, and they come built in with the Python language. We've used them without thinking about how the program for calculating the maximum has been implemented. This <em>abstraction</em> is both convenient and powerful: we can simply use the functions to build more interesting calculations without worrying about the details behind the calculations.</p>
-<p>We'll soon start defining our own functions to similarly package our algorithms for convenient use. But first, let's try to understand how the above statements work. Each of the two statements is a <em>function call</em>, which is always of the form</p>
-<div class="highlight"><pre><span></span><span class="n">function_name</span><span class="p">(</span><span class="n">arguments</span><span class="p">)</span>
-</pre></div>
-<p>An <em>argument</em> is an expression within the parentheses of the function call. There can be several arguments, separated by a comma. When a function gets called, the argument expressions are evaluated one at a time, from left to right. The resulting values are passed to the function. The function is then executed and produces an output value. For example, the following code calculates the absolute value of a temperature difference.</p>
-<div class="highlight"><pre><span></span><span class="n">temp_morning</span> <span class="o">=</span> <span class="mi">5</span>
-<span class="n">temp_afternoon</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="nb">abs</span><span class="p">(</span><span class="n">temp_morning</span> <span class="o">-</span> <span class="n">temp_afternoon</span><span class="p">)</span>
-</pre></div>
-<p>The argument expression <code>temp_morning - temp_afternoon</code> is evaluated first, producing the value <code>-5</code>, which gets passed to <code>abs</code>, resulting in the absolute value <code>5</code>.</p>
-<p>Function calls can also be nested, for example:</p>
-<div class="highlight"><pre><span></span><span class="nb">min</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-</pre></div>
-<p>Here Python will start evaluating the arguments from left to right. First, <code>abs(-1)</code> evaluates to <code>1</code>, and then <code>max(3, 0)</code> evaluates to <code>3</code>. These then get passed to <code>min</code>. The above function call is therefore equivalent to evaluating <code>min(1, 3)</code>.</p>
-<p>If you don't know exactly what a function does, you can type <code>help(function_name)</code> into the console.</p>
-<div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="nb">abs</span><span class="p">)</span>
-</pre></div>
-<p>This will provide documentation for the function.</p>
-<p>But how do these calculations work, and how can we define functions for our own algorithms?</p>
+</div>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Defining-a-function">Defining a function<a class="anchor-link" href="#Defining-a-function">¶</a></h3><p>Python's built-in functions, such as <code>print</code>, <code>type</code> and <code>abs</code>, are useful but limited: often there aren't built-in functions for what we want to do. Now we'll learn how to add to these by defining our own functions.</p>
-<p>Here in the UK we're still behind in adopting the metric system, so coming from Canada you end up doing quite a few conversions. So we'd like to be able to do something like this.</p>
-<div class="highlight"><pre><span></span><span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">miles_to_km</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<p>Compared to the while loop, this is more compact and easier to read. How does it work?</p>
+<p>The general structure of a for loop is:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">sequence</span><span class="p">:</span>
+    <span class="c1"># statements</span>
 </pre></div>
-<p>However, what we get is an error. Python tells us that there is no function with the name <code>miles_to_km</code>.</p>
-<pre><code>NameError: name 'miles_to_km' is not defined
-</code></pre>
-<p>We'll need to <em>define</em> a new function that tells Python what to do when we call <code>miles_to_km</code>. Here's how we can do it.</p>
-<div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">miles_to_km</span><span class="p">(</span><span class="n">miles</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">miles</span> <span class="o">*</span> <span class="mf">1.609</span>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A for loop goes through the elements in a sequence in order, executing the code block for each <code>element</code> until the sequence is exhausted. The keyword <code>in</code> is special and used as follows. One by one, starting from the first value in the sequence, the for loop assigns the value to the variable <code>element</code>, after which the code block is executed. In the example above, <code>number</code> gets assigned the values 0 to 4 in ascending order. After the loop finishes, the value of <code>number</code> remains at 4.</p>
+<p>Here we generate the sequence of variables using the built-in function <code>range</code>.
+The <code>range</code> function creates a structure housing a sequence of integer values based on its input.
+When specified as <code>range(n)</code>, it will include the integers from zero to <code>n-1</code>, so <code>n</code> values in total, here 0 through 4.
+We can specify <code>range</code> more generally using up to three parameters. If we include two, these are interpreted as the start and end of the sequence. If we add a third parameter, it is the step size between the start and the end. The last (end) element is always excluded from the sequence (5 is not included in the example).</p>
+<p>In sum, we can do this:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+<span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
 </pre></div>
-<p>The first line is the function header. It consists of the keyword <code>def</code>, which tells Python that we're defining a function. It is followed by the function name <code>miles_to_km</code>, and a comma-separated list of parameters within parentheses, and finally a colon. Here the only parameter is <code>miles</code>. Defining a function is similar to defining a variable: with the definition, Python knows that the name <code>miles_to_km</code> exists and points to this piece of code.</p>
-<p>After the colon, we have a sequence of statements that form the function body. These statements are executed whenever we call the function. By convention, this is exactly four spaces, which you'll get in VS Code with the Tab key.</p>
-<p>Now, if we run this code and then call the function, we get a result.</p>
-<div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">miles_to_km</span><span class="p">(</span><span class="n">miles</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">miles</span> <span class="o">*</span> <span class="mf">1.609</span>
+<p>So, for example:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can loop from high to low numbers by specifying a start higher than the end and a negative step size.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Sometimes, we want to use nested loops.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'Outer loop, for value i='</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'Inner loop, for value j='</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here, we're running everything in the indented for-loop code block three times. And within that block, we have another indented for loop the body of which runs twice - every time the outer loop repeats. So in total, the inner loop runs $3 \cdot 2=6$ times. Nested loops like this can be very useful for looping through multi-dimensional data like matrices. We can in principle nest many times, but in practice we rarely have more than two or three levels of nesting.</p>
+<p>Sometimes we want stop a loop before the sequence is finished. Python provides flow control tools, among which the <em>break</em> statement that can prove very useful. We can use it like this:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">break</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Most looping tasks can be done with either for or while loops. <strong>For loops are often more convenient than while loops when we are working with specific sequences, and we know how many times we need to iterate. While loops can be very useful in applications where we don't know how many iterations our calculation will require.</strong></p>
+<h3 id="Question-2:-Loops">Question 2: Loops<a class="anchor-link" href="#Question-2:-Loops">¶</a></h3><p>Check your understanding of for loops with exercises on the terminal/command line. Type in:</p>
+<p><code>python ok -q q2 -u</code></p>
+<p>If you get stuck on a question, try the code out in the Python console.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Besides sequences of integers with <code>range</code>, we use for loops to iterate through any sequence. In this session, we will look at two types of sequences: <em>lists</em> and <em>strings</em>.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Lists">Lists<a class="anchor-link" href="#Lists">¶</a></h2><p>We've so far mainly dealt with <em>scalar</em> data such as integers and floats. In practice, we're often working with <em>sequences</em> of scalar data, or want to organize several pieces of data together. Python offers a few options to build sequences, the most common of which are <em>lists</em>. A list is defined using square brackets, and the items within the list are separated by a comma. Type the following commands into the console:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A list is an ordered collection of items. These items can be anything: numbers, strings, variables, or other lists.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">number_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">word_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'this'</span><span class="p">,</span> <span class="s1">'is'</span><span class="p">,</span> <span class="s1">'a'</span><span class="p">,</span> <span class="s1">'list'</span><span class="p">]</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">b</span> <span class="o">=</span> <span class="s1">'good'</span>
+<span class="n">mixed_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's look at some of the things we can do with a list. The list <code>prices</code> below contains Kensington and Chelsea mean house prices from 2003 through 2008 (in thousands of pounds). The data are from the <a href="https://data.london.gov.uk/dataset/average-house-prices-borough">London Datastore</a>.</p>
+<p>First, let's see how we can access the elements of a list through their indices. <em>The index of the first element is zero.</em></p>
+<p>Here are some ways to access a list: try them out!</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">prices</span> <span class="o">=</span> <span class="p">[</span><span class="mi">400</span><span class="p">,</span> <span class="mi">450</span><span class="p">,</span> <span class="mi">465</span><span class="p">,</span> <span class="mi">525</span><span class="p">,</span> <span class="mi">650</span><span class="p">,</span> <span class="mi">700</span><span class="p">]</span>
 
-<span class="n">x</span> <span class="o">=</span> <span class="n">miles_to_km</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">prices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">prices</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">prices</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">prices</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">prices</span><span class="p">[::</span><span class="mi">2</span><span class="p">]</span> <span class="c1"># every other element</span>
 </pre></div>
-<p>What happens when we run the code? First, Python executes the function definition, which creates a new function object. Next, Python executes the function call <code>miles_to_km(30)</code>. The argument <code>30</code> is assigned to the parameter variable <code>miles</code> within this function call. Python then executes the <code>return</code> statement. It evaluates the expression <code>miles * 1.609</code>. The keyword <code>return</code> then tells Python that this is the value we want to produce as output of the function. With the <code>return</code>, the function call finishes, and Python literally returns to the place in our program where the function was called. Here the resulting value gets assigned to the variable <code>x</code>.</p>
-<p>Now it is convenient to call the function many times over with different arguments.</p>
-<div class="highlight"><pre><span></span><span class="n">miles_to_km</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">miles_to_km</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
-<span class="n">miles_to_km</span><span class="p">(</span><span class="mi">45</span><span class="p">)</span>
-</pre></div>
-<p>In general, a function is defined and called as follows.</p>
-<div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">function_name</span><span class="p">(</span><span class="n">parameters</span><span class="p">):</span>
-    <span class="n">statement</span>
-    <span class="n">statement</span>
-    
-<span class="n">function_name</span><span class="p">(</span><span class="n">arguments</span><span class="p">)</span>
-</pre></div>
-<p>The <code>def</code> keyword starts the function definition, followed by the name we give the function, parameters within parentheses, and a colon. The parameters are variables that the function uses that we may wish to vary from the outside, such as the variable miles above. The block of statements that follows is indented, and gets executed when we call the function. The call is always by the name, followed by arguments. These arguments are then assigned to the parameter variables of the function.</p>
-<p>In brief, a function allows us to give a name to a block of code. We can then run that block from anywhere in our program, perhaps many times over.</p>
+</div>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Printing-and-returning">Printing and returning<a class="anchor-link" href="#Printing-and-returning">¶</a></h3><p>Sometimes we don't need our function to return a value. For example, we might just want a function to display some text in the console. We can write the function as follows, with nothing following the return statement. When we call the function and the code execution hits the return statement, Python simply returns to the original line of code.</p>
-<div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">print_compliment</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">'Great job, '</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s1">'!'</span><span class="p">)</span>
-    <span class="k">return</span>
+<p>We can access a "slice" of the list <code>prices</code> using the syntax <code>prices[begin:end:step]</code>, for example <code>prices[1:5:2]</code>. We need to be careful with this notation: our slice will include the first <code>begin</code>-th element but exclude the final <code>end</code>-th element (just like range), picking elements with a step size of of <code>step</code>. So <code>prices[1:5:2]</code> will give the values at indices 1 and 3 but not five, or <code>[450, 525]</code>. We can exclude the step size to get the default step of one. We can also exclude the start or the end (but keep the colons) for example to take every other element of the entire list.</p>
+<p>We can change the elements of a list and create new lists from existing ones. Suppose the first value of <code>prices</code> was erroneous and the correct value is 405. To change it, we type in</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">prices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">405</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can then type <code>prices</code> to the console to see that the value has changed.</p>
+<p>How do we add another price, for 2009?</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">prices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">675</span><span class="p">)</span> <span class="c1"># append adds an item to the end</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We might also learn a bunch of new prices. Here are the prices from 2010 through 2015, in a different list. We can then combine the lists:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">new_prices</span> <span class="o">=</span> <span class="p">[</span><span class="mi">750</span><span class="p">,</span> <span class="mi">790</span><span class="p">,</span> <span class="mi">890</span><span class="p">,</span> <span class="mi">975</span><span class="p">,</span> <span class="mi">1195</span><span class="p">,</span> <span class="mi">1200</span><span class="p">]</span>
 
-<span class="n">print_compliment</span><span class="p">(</span><span class="s1">'John'</span><span class="p">)</span>
+<span class="n">all_prices</span> <span class="o">=</span> <span class="n">prices</span> <span class="o">+</span> <span class="n">new_prices</span> <span class="c1"># add new_prices to the end of prices, create new result list</span>
+<span class="n">prices</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">new_prices</span><span class="p">)</span> <span class="c1"># append all items of new_prices to prices </span>
 </pre></div>
-<p>If we now assign the result of the function call to a variable, the value is the special value <code>None</code>, which indicates an "empty" or "null" value.</p>
-<div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">print_compliment</span><span class="p">(</span><span class="s1">'John'</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-</pre></div>
-<p>This will display:</p>
-<div class="highlight"><pre><span></span><span class="n">Great</span> <span class="n">job</span><span class="p">,</span> <span class="n">John</span><span class="err">!</span>
-<span class="kc">None</span>
-</pre></div>
-<p>Since the absence of a return value is fairly common, Python allows us to omit the return statement altogether. If a function finishes without a return, the code execution still returns to the point where the function was called, with the value <code>None</code>. So, the below code works exactly like the code above.</p>
-<div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">print_compliment</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">'Great job, '</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s1">'!'</span><span class="p">)</span>
-
-<span class="n">print_compliment</span><span class="p">(</span><span class="s1">'John'</span><span class="p">)</span>
-</pre></div>
-<p>Note that the text now only exists within the function call. If we want to use it outside the function, we need to return the text. Then we can use it multiple times without always calling the function.</p>
-<div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">print_compliment</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
-    <span class="k">return</span> <span class="s1">'Great job, '</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s1">'!'</span>
-
-<span class="n">text</span> <span class="o">=</span> <span class="n">print_compliment</span><span class="p">(</span><span class="s1">'John'</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-</pre></div>
-<p>Note that a function does not need to have parameters. For example, we could define a function to print compliments to a specific person, as follows.</p>
-<div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">print_compliment_donald</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">'Well done, Donald!'</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">'Great job!'</span><span class="p">)</span>
-
-<span class="n">print_compliment_donald</span><span class="p">()</span>
-</pre></div>
-<p>This will print out:</p>
-<div class="highlight"><pre><span></span><span class="n">Well</span> <span class="n">done</span><span class="p">,</span> <span class="n">Donald</span><span class="err">!</span>
-<span class="n">Great</span> <span class="n">job</span><span class="err">!</span>
-</pre></div>
-<h3 id="A-common-error">A common error<a class="anchor-link" href="#A-common-error">¶</a></h3><p>Just like a variable, a function must be defined before we can call it. The following code will result in an error if the function <code>print_personal_compliment</code> has not been previously defined.</p>
-<div class="highlight"><pre><span></span><span class="n">print_personal_compliment</span><span class="p">(</span><span class="s1">'Donald'</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">print_personal_compliment</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">'Well done, '</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s1">'!'</span><span class="p">)</span> <span class="c1"># insert the name into the phrase</span>
-</pre></div>
-<div class="highlight"><pre><span></span><span class="ne">NameError</span><span class="p">:</span> <span class="n">name</span> <span class="s1">'print_personal_compliment'</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">defined</span>
-</pre></div>
+</div>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Local-variables">Local variables<a class="anchor-link" href="#Local-variables">¶</a></h3><p>Let's look at another function example. We'll replicate what the built-in function max might do. Here's how it might work.</p>
-<div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">max_value</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">a</span>
-    <span class="k">else</span><span class="p">:</span> 
-        <span class="k">return</span> <span class="n">b</span>
+<p>We can get the length of a list using the function <code>len()</code>.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
 </pre></div>
-<p>The function takes two arguments, and compares their values, returning the larger one.</p>
-<p>Now let's call this function. Keep track of the values of the different variables when we run the following code.</p>
-<div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">max_value</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">a</span>
-    <span class="k">else</span><span class="p">:</span> 
-        <span class="k">return</span> <span class="n">b</span>
-
-<span class="n">c</span> <span class="o">=</span> <span class="n">max_value</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Looping-through-lists">Looping through lists<a class="anchor-link" href="#Looping-through-lists">¶</a></h3><p>Next, let's loop through a list using a for loop. This is very convenient:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">price</span> <span class="ow">in</span> <span class="n">prices</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'The price was '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">price</span><span class="p">))</span>
 </pre></div>
-<p>What would you expect to be printed out?</p>
 </div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Here's a <a href="http://pythontutor.com/visualize.html#code=def%20max_value%28a,%20b%29%3A%0A%20%20%20%20if%20a%20%3E%20b%3A%0A%20%20%20%20%20%20%20%20return%20a%0A%20%20%20%20else%3A%20%0A%20%20%20%20%20%20%20%20return%20b%0A%0Ac%20%3D%20max_value%283,%205%29%0Aprint%28c%29%0Aprint%28a%29&amp;cumulative=false&amp;curInstr=0&amp;heapPrimitives=false&amp;mode=display&amp;origin=opt-frontend.js&amp;py=3&amp;rawInputLstJSON=%5B%5D&amp;textReferences=false">link to a visualisation</a> of the above code executing.</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's walk through the code execution, which goes roughly as follows:</p>
-<ol>
-<li>We define the function, then call it with the arguments 3 and 5.</li>
-<li>Python finds the function and starts executing it.</li>
-<li>First, it assigns the two arguments to the parameters <code>a</code> and <code>b</code>.</li>
-<li>It then executes the statements and returns a value. But any variables that are created within the function are <em>local</em> variables, including the parameter variables <code>a</code> and <code>b</code>. These variables only exist when the function is being executed, and disappear when we return from the function call.</li>
-<li>When we try to use a local variable from outside the function call, we therefore get a <code>NameError</code>.</li>
-</ol>
-<p>The part of a program where we can use a variable is called its <em>scope</em>. The scope of a variable defined within a function is the function call.</p>
-<p>Here's another example:</p>
-<div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="mi">4</span>
-<span class="n">c</span> <span class="o">=</span> <span class="n">max_value</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<p>The loop will go through each value of the list in order, assign this value to the variable prices, and execute the loop body statements with this value. When it has gone through all the prices, it will stop, and the program will move on.</p>
+<p>Sometimes we want to loop through list <em>indices</em> instead of its <em>elements</em>. For example, we might want to loop through the house prices and say whether the price went up compared to the previous year. We then need to compare to adjacent values in the list, which is convenient to do with indices, checking the value at index 1 vs 0, index 2 vs 1, and so on.</p>
+<p>To loop through a list using indices, we first need the length of the list to know how many iterations we need to do. We can then use <code>range</code> to go through the indices in the list. Let's first just repeat the preceding loop:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># We use range on the length of prices to make sure we go through all list indices.</span>
+<span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">prices</span><span class="p">)):</span>
+    <span class="n">price</span> <span class="o">=</span> <span class="n">prices</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'The price was '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">price</span><span class="p">))</span>
 </pre></div>
-<p>What do you think Python would display here?</p>
-<p>Let's again step through the code.</p>
-<ol>
-<li>We assign the value 4 to the variable <code>b</code>.</li>
-<li>We then call the function <code>max_value</code> with the arguments <code>b</code> and 1.</li>
-<li>Python starts executing the function by creating the local variables <code>a</code> and <code>b</code>. These are in the local scope, or what is sometimes called the namespace. Since it is local, it does not overwrite variable values outside its scope. In this local frame, <code>a</code> is 4 and <code>b</code> is 1, and we return the maximum of those.</li>
-<li>When we return from the function call, the local namespace or frame disappears, and we're left with the variables we had outside the function.</li>
-<li>So, after we return, <code>b</code> is still equal to 4 and <code>a</code> does not exist.</li>
-</ol>
-<p>Generally, we can think about local variables and scoping as follows.</p>
-<ol>
-<li>At the global level, in the Python interpreter, there is a "frame" (or "table") of names keeping track of all names defined at that level and their assigned values.</li>
-<li>When a function is called, a new frame is created to keep track of all names within that function call. This could result in many such tables, as a function could call another function that could call another function, etc.</li>
-<li>When a function call is completed, its frame disappears. Some values may be returned to the frame from which the function was called.</li>
-</ol>
-<p>Why does Python work like this? One good reason is <strong>abstraction</strong>. If the variables we declare inside the function did affect affect outside variables, we would have to be careful not to use the same variable names inside functions. But as it is, we don't have to worry about how the code has been written inside the function. This allows us to simply take a function as a building block for more complex programs, abstracting from how it's been implemented.</p>
+</div>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's practice these ideas with some exercises.</p>
+<p>The output is equivalent to our previous loop. So instead of directly looping through prices, here we access them through each of the integer indices we loop through, from zero to the length of the list.</p>
+<p>To check whether prices went up or down, we can do build on this idea:</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Question-2:-Functions">Question 2: Functions<a class="anchor-link" href="#Question-2:-Functions">¶</a></h3><p>Use the command</p>
-<pre><code>python ok -q q2 -u
-</code></pre>
-<p>on the command line to test your understanding of functions.</p>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span> <span class="c1"># why do we have -1 here? what happens if we remove it?</span>
+    <span class="k">if</span> <span class="n">prices</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">prices</span><span class="p">[</span><span class="n">index</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'Prices went up at index '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s1">'Prices went down at index '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">))</span>
+</pre></div>
 </div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Heron's-algorithm-for-square-roots">Heron's algorithm for square roots<a class="anchor-link" href="#Heron's-algorithm-for-square-roots">¶</a></h3><p>You'll have a chance to try out the algorithm in the exercises below.</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Writing-functions">Writing functions<a class="anchor-link" href="#Writing-functions">¶</a></h3><p>We will now start defining our own functions.</p>
-<h3 id="Question-3:-Sum-of-squares">Question 3: Sum of squares<a class="anchor-link" href="#Question-3:-Sum-of-squares">¶</a></h3><p><strong>This session contains a Python script file <code>algo.py</code>. Open this file now.</strong> You should use the file explorer in the left-hand panel in VS Code. The file contains "skeleton" implementations of the functions you'll define. Your task is to complete the functions.</p>
-<p><strong>Please do not change the file name from <code>algo.py</code></strong>. When you later test your code with OK, it will always test the contents of <code>algo.py</code>. This means that the tests will fail if you change the file name.</p>
-<p>When you open the file, you should see something like this.
-<img alt="Scaffolded functions" src="images/scaffold.png"/></p>
+<p>This is a slightly more complicated loop. At each iteration, we check whether the price at the index is higher the previous price, and then print out the corresponding text.</p>
+<p>When we loop through indices, we need to be careful to go through the exact right indices. Here we must be careful to check index against index plus one, because there is no price to compare to before index zero.</p>
+<p>What is the difference between the two types of looping (through <code>prices</code> vs <code>range(len(prices))</code>)? Looping through values is easier when all we need to do is something based on each value. But the loop with the comparison would be a bit tricky to write by simply going through the values of the list. That's because we need to make comparisons between two adjacent prices, and looping through indices allows us to easily access the two prices. (We could achieve this in the other loop too - can you think of how to do so?)</p>
+<p>We will use both types of looping through sequences throughout the module.</p>
+<h3 id="Lists-within-lists">Lists within lists<a class="anchor-link" href="#Lists-within-lists">¶</a></h3><p>Python lists are flexible, and can contain different types of data, other lists, etc.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">'a'</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The function <code>sum_of_squares</code> contains first a string explaining what the function does (or should do!), and giving some examples of its output for different inputs. This is called a <em>documentation string</em>, or <em>docstring</em> for short. When writing functions, including a docstring is good practice as it makes the purpose and workings of the function clear to whoever is using your code.</p>
+<p>A list that contains another list is sometimes called a <em>nested</em> list. Let's look at another example. Suppose we're keeping track of European cities we've visited, as well as the respective countries. One way to do this is with a list of lists each containing city-country pairs as follows.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">visited_cities</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">'Paris'</span><span class="p">,</span> <span class="s1">'France'</span><span class="p">],</span> <span class="p">[</span><span class="s1">'Berlin'</span><span class="p">,</span> <span class="s1">'Germany'</span><span class="p">],</span> <span class="p">[</span><span class="s1">'Bucharest'</span><span class="p">,</span> <span class="s1">'Romania'</span><span class="p">],</span> <span class="p">[</span><span class="s1">'Reykjavik'</span><span class="p">,</span> <span class="s1">'Iceland'</span><span class="p">],</span> <span class="p">[</span><span class="s1">'Munich'</span><span class="p">,</span> <span class="s1">'Germany'</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can now access and slice the items through "nested" notation: for example <code>visited_cities[1][0]</code> will give us <code>Berlin</code>. Here <code>visited_cities[1]</code> is the list <code>['Berlin', 'Germany']</code>, and the value at index <code>0</code> of this list is <code>Berlin</code>.</p>
+<p>Let's get all cities in Germany that we have visited. We want to store them in a list. We'll first create an empty list, and then loop through the visited cities, picking the German ones.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">german_cities</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># creates empty list</span>
+<span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">visited_cities</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'Germany'</span><span class="p">:</span>
+        <span class="n">german_cities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">german_cities</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Many common tasks involve looping through lists. We will see more examples throughout the module.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Methods">Methods<a class="anchor-link" href="#Methods">¶</a></h2><p>Data types in Python come associated with actions that work specifically for them. For example, we can perform calculations on numbers and append values to lists. Actions associated with a data type are called methods. They are functions that you can only call for certain types of data. We have already encountered some list methods, such as <code>append()</code>. There are a lot more, here are some common ones:</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>L = [1,2,3,4,5,'Joe']</code></td>
+<td>create a list containg the items inside tha brackets</td>
+</tr>
+<tr>
+<td><code>L = list(range(0,6))</code></td>
+<td>create a list containg a sequence of variables</td>
+</tr>
+<tr>
+<td><code>len(L)</code></td>
+<td>returns the number of items in the list</td>
+</tr>
+<tr>
+<td><code>L.append('Mike')</code></td>
+<td>add an item ('Mike') at the end of the list</td>
+</tr>
+<tr>
+<td><code>L.remove('Joe')</code></td>
+<td>remove the first item in the list with this value ('Joe')</td>
+</tr>
+<tr>
+<td><code>L.pop(4)</code></td>
+<td>remove the item of the list with this index (4)</td>
+</tr>
+<tr>
+<td><code>L.insert(3,'Kate') </code></td>
+<td>insert the item with this value ('Kate') in this position (3)</td>
+</tr>
+<tr>
+<td><code>L.extend([1,4])</code></td>
+<td>add items from an iterable e.g list ([1,4]) at the end of the list</td>
+</tr>
+<tr>
+<td><code>L.sort()</code></td>
+<td>sorts the list</td>
+</tr>
+<tr>
+<td><code>L.reverse()</code></td>
+<td>reverses the list</td>
+</tr>
+</tbody>
+</table>
+<p>Most methods are accessed using the dot notation, like <code>L.append('Mike')</code>. For some methods, Python provides easier ways to perform them, like <code>len(L)</code>.</p>
+<p>Both the <code>append</code> and <code>extend</code> methods add values to a list. What is the difference between <code>L.append([1,4])</code> and <code>L.extend([1,4])</code>?</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>One final note on lists, for now. Sometimes we want to make copies of lists. This can lead to surprising results:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">list1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">list2</span> <span class="o">=</span> <span class="n">list1</span>
+<span class="n">list1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">list2</span><span class="p">)</span> <span class="c1"># ?!?!??</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In Python, copying a list using <code>'='</code> does not create a new copy of the list data in the computer's memory. What we are copying here is the <em>reference</em> from the name <em>list1</em> to data - not the actual data. Therefore, the names <em>list1</em> and <em>list2</em> both actually point to the same list in memory. In order not to end up changing the original values later, we have to create a new list that contains the same items. This can be done by slicing or by using the built-in function <code>list()</code>.</p>
+<div class="highlight"><pre><span></span><span class="n">list1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">list2</span> <span class="o">=</span> <span class="n">list1</span><span class="p">[:]</span> <span class="c1"># slice that gets all items</span>
+<span class="n">list2</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">list1</span><span class="p">)</span> <span class="c1"># function that creates a new list of the items</span>
+</pre></div>
 <blockquote>
-<p><strong>Note.</strong> Please don't remove the docstring or doctests: OK uses it to test your code. Add your lines of code below the comments.</p>
+<p><strong>Advanced</strong> These methods will copy only the first-order lists elements. If we have nested lists and end up wanting to make sure to copy nested elements too (instead of references), we need to "deep copy" the elements. Search online for "python list deepcopy".</p>
 </blockquote>
-<p>When working on a function, you can test your implementation in the Python console. To do so, <strong>first click the mouse on any part of your defined function</strong>. <strong>Then hold <code>shift</code> and press <code>enter</code> to load your function in interactive Python</strong>. Then use interactive Python to call your function with different inputs to test it. Your interactive Python session should look like the below:</p>
-<pre><code>&gt;&gt;&gt; def sum_of_squares(x, y):
-...     """
-...     Returns the sum of squares of x and y
-...     Examples:
-...     &gt;&gt;&gt; sum_of_squares(1, 2)
-...     5
-...     &gt;&gt;&gt; sum_of_squares(100, 3)
-...     10009
-...     &gt;&gt;&gt; sum_of_squares(-1, 0)
-...     1
-...     &gt;&gt;&gt; x = sum_of_squares(2, 3)
-...     &gt;&gt;&gt; x + 1
-...     14
-...     """
-...     # DON'T CHANGE ANYTHING ABOVE
-...     # YOUR CODE BELOW THIS
-...     return 0
-... 
-&gt;&gt;&gt; sum_of_squares(2, 3)
-0
-&gt;&gt;&gt;
-</code></pre>
+<h3 id="Question-3:-Lists">Question 3: Lists<a class="anchor-link" href="#Question-3:-Lists">¶</a></h3><p>Check your understanding of loops and lists with the following command in the terminal/command line:</p>
+<p><code>python ok -q q3 -u</code></p>
+<p>If you get stuck on a question, try the code out in the console.</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In the above example, we haven't edited the function yet, so the result is not correct: the output should be 5. After you edit the code, the output for each example should be the one indicated in the documentation string.</p>
+<h2 id="Working-with-text">Working with text<a class="anchor-link" href="#Working-with-text">¶</a></h2><p>Manipulating, parsing, or otherwise working with text is a very common task we encounter in analytics. We have already seen some strings in the first session: we've printed and added together strings.</p>
+<h3 id="Slicing-and-combining-strings">Slicing and combining strings<a class="anchor-link" href="#Slicing-and-combining-strings">¶</a></h3><p>Strings are like lists in that you can go access and go through particular elements (characters).
+The similarity means that we can slice strings by index just like lists, with the characters of the string as our "elements". On the console, try the following commands for both values of <code>test_word</code>.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">test_word</span> <span class="o">=</span> <span class="s1">'lovely'</span>
+
+<span class="c1"># String slicing</span>
+<span class="n">test_word</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">test_word</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">test_word</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">test_word</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="c1"># Changing the value</span>
+<span class="n">test_word</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'a'</span> <span class="c1"># gives an ERROR (if we need to change the string, we can use the method `replace`)</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now edit the code in the function <code>sum_of_squares</code> to work as per the function documentation. Note that <strong>whenever you edit the function code, you must use <code>shift</code> + <code>enter</code> again for Python to take into account your changes.</strong></p>
-<p>When you have completed the code and tested it, use <code>ok</code> to test the function more comprehensively. Use the command line terminal, ensuring you are in the directory with the other session files.</p>
-<p>In the terminal, type in the following command:</p>
-<pre><code>python ok -q sum_of_squares
-</code></pre>
-<p>to test your code. This will run a bunch of tests on your function.</p>
-<p>In the future, when working on a function in any assignment, you will always use</p>
-<pre><code>python ok -q function_name
+<p>We can "add" strings together using the + sign.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">test_word</span> <span class="o">+</span> <span class="s1">' '</span> <span class="o">+</span> <span class="n">test_word</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Looping-through-strings">Looping through strings<a class="anchor-link" href="#Looping-through-strings">¶</a></h3><p>We can loop through a string just like a list using a <code>for</code> loop and the operator <code>in</code>.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">vowels</span> <span class="o">=</span> <span class="s1">'aeiouy'</span>
+
+<span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">vowels</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">letter</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Immutable-strings">Immutable strings<a class="anchor-link" href="#Immutable-strings">¶</a></h3><p>Even though strings are very similar to lists, there is an important difference. We cannot change the elements of strings. In programming lingo, strings are <em>immutable</em>.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">a_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+<span class="n">a_list</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span> <span class="c1"># OK with a list</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a_list</span><span class="p">)</span> 
+
+<span class="n">a_string</span> <span class="o">=</span> <span class="s1">'fire'</span>
+<span class="n">a_string</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'a'</span> <span class="c1"># not OK with a string</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a_string</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="String-methods">String methods<a class="anchor-link" href="#String-methods">¶</a></h3><p>Like with lists, there exist many built-in methods that work specifically for strings. Here are some common ones.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s = 'lovely weather'</code></td>
+<td>Create string</td>
+</tr>
+<tr>
+<td><code>s.capitalize()</code></td>
+<td>Capitalizes first letter of <code>s</code></td>
+</tr>
+<tr>
+<td><code>s.lower()</code></td>
+<td>Converts all uppercase letters in <code>s</code> to lowercase</td>
+</tr>
+<tr>
+<td><code>s.upper()</code></td>
+<td>Converts all lowercase letters in <code>s</code> to uppercase)</td>
+</tr>
+<tr>
+<td><code>s.startswith('love')</code></td>
+<td>Checks if <code>s</code> starts with specified string</td>
+</tr>
+<tr>
+<td><code>len(s)</code></td>
+<td>Returns the length of the <code>s</code></td>
+</tr>
+<tr>
+<td><code>s.find('v')</code></td>
+<td>Finds the first index at which <code>v</code> occurs in <code>s</code></td>
+</tr>
+<tr>
+<td><code>s.replace(old, new)</code></td>
+<td>Replaces all occurrences of old in <code>s</code> with new</td>
+</tr>
+</tbody>
+</table>
+<p>Sometimes we want to split strings into parts: for example a sentence into words. We can then use the convenient <code>split</code> method, which breaks a string into a list. The default is by a space, but we can also specify the delimiter.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">sentence</span> <span class="o">=</span> <span class="s1">'The Python language was created by Guido van Rossum. It was named after Monty Python.'</span>
+<span class="n">sent_list</span> <span class="o">=</span> <span class="n">sentence</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="c1"># default is split by space</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sent_list</span><span class="p">)</span>
+<span class="n">sent_list</span> <span class="o">=</span> <span class="n">sentence</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'.'</span><span class="p">)</span> <span class="c1"># split by full stop</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sent_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We often also want to do the opposite operation, joining together list values into a single string:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">german_cities</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Berlin'</span><span class="p">,</span> <span class="s1">'Munich'</span><span class="p">,</span> <span class="s1">'Frankfurt'</span><span class="p">]</span> 
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">german_cities</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The <code>string.format()</code> method is useful for displaying values and variables.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'The numbers are </span><span class="si">{0}</span><span class="s1"> and </span><span class="si">{1}</span><span class="s1">.'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">))</span> <span class="c1"># 0 and 1 are indices for input of format()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's combine <code>join</code> and <code>format</code>.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">'We visited </span><span class="si">{0}</span><span class="s1"> during the trip.'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">german_cities</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>From Python versions 3.6 onwards, we can do the same in a more convenient way using so-called f-strings. If we use the letter f preceding the string, we can input variables directly:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'We visited </span><span class="si">{</span><span class="n">german_cities</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> first.'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Built-in methods are very useful, as we don't need to write algorithms from scratch to perform these common tasks. There are many further built-in string methods available. Indeed, the built-in methods are so numerous that even experienced programmers don't try to memorize all of them. So how should we approach a programming problem when we don't know if a convenient method for our problem already exists? How do we know what methods exist and how they work?</p>
+<p>There are several good sources of information. One is search engines: if you need to do a specific thing with strings, search for it on Google, for example "python string replace". More often than not, you're not the first person to try to figure out the same problem, and the results will usually point you to very good resources, such as Stack Overflow. Another useful resource is Python's help, which we can access in the console as follows.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">split</span><span class="p">)</span> <span class="c1"># help on specific method</span>
+<span class="c1"># help(str) # help on the str data type - lists all methods</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Question-4:-More-on-Strings">Question 4: More on Strings<a class="anchor-link" href="#Question-4:-More-on-Strings">¶</a></h3><p>Check your understanding of comparisons and conditionals with the following command in the terminal/ command line:</p>
+<p><code>python ok -q q4 -u</code></p>
+<p>If you get stuck on a question, try the code out in the console.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Question-5:-Looping-practice">Question 5: Looping practice<a class="anchor-link" href="#Question-5:-Looping-practice">¶</a></h3><p><strong>We'll now start working on functions in VS Code. Open the file <code>seq_data.py</code></strong>.</p>
+<blockquote>
+<p><strong>Important.</strong> In the following exercises, please edit the file <code>seq_data.py</code> and <strong>but do not change the name of this file.</strong> OK will run tests on the file <code>seq_data.py</code>, so <strong>if you save your work under a different name, the tests won't work.</strong> For the same reason, please don't change the names of the functions in the file or edit or remove the function documentation (the green comment string in each function).</p>
+</blockquote>
+<p>1 - Implement the function <code>item_lengths</code> in <code>seq_data.py</code>.</p>
+<p><strong>Hint</strong>: you may want to loop through the elements of the input list using a loop similar to</p>
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">input_list</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</pre></div>
+<p>and use the list method <code>append</code>.</p>
+<p>In the command line, type in the following command:</p>
+<pre><code>python ok -q item_lengths
 </code></pre>
 <p>to test your code.</p>
-<p>Note that by default, only tests that did not pass will show up. If your function works perfectly, <code>ok</code> won't show you test results. If you want to see all the tests that were run, you can use the <code>-v</code>:</p>
-<pre><code>python ok -q function_name -v
-</code></pre>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Question-4:-Print-grade">Question 4: Print grade<a class="anchor-link" href="#Question-4:-Print-grade">¶</a></h3><p>Next, complete the function <code>print_grade</code> in <code>algo.py</code> as per the instructions in the code below.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [1]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">print_grade</span><span class="p">(</span><span class="n">mark</span><span class="p">,</span> <span class="n">grade_high</span><span class="p">,</span> <span class="n">grade_low</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Prints out distinction, pass, or fail depending on mark</span>
-<span class="sd">    </span>
-<span class="sd">    If mark is at least grade_high, prints 'distinction'</span>
-<span class="sd">    Else if mark is at least grade_low, prints 'pass'</span>
-<span class="sd">    Else prints 'fail'</span>
-
-<span class="sd">    Example use:</span>
-<span class="sd">    &gt;&gt;&gt; grade_high = 70 </span>
-<span class="sd">    &gt;&gt;&gt; grade_low = 50</span>
-<span class="sd">    &gt;&gt;&gt; print_grade(20, grade_high, grade_low)</span>
-<span class="sd">    fail</span>
-<span class="sd">    &gt;&gt;&gt; print_grade(61, 70, 50)</span>
-<span class="sd">    pass</span>
-<span class="sd">    &gt;&gt;&gt; print_grade(90, 80, 60)</span>
-<span class="sd">    distinction</span>
-<span class="sd">    """</span>
-    <span class="c1"># DON'T CHANGE ANYTHING ABOVE</span>
-    <span class="c1"># YOUR CODE HERE</span>
+<p>2 - Implement the function <code>longest_item</code> in <code>seq_data.py</code>.</p>
+<p><strong>Hint</strong>: you may want to loop through the indices of the input list using a loop similar to</p>
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">input_list</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">input_list</span><span class="p">[</span><span class="n">index</span><span class="p">])</span> <span class="c1"># this will print out the index and the corresponding element</span>
 </pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>You can test your implementation with</p>
-<pre><code>python ok -q print_grade
+<p>and use variables to keep track of where the longest item so far was found.</p>
+<p>In the command line, type:</p>
+<pre><code>python ok -q longest_item
 </code></pre>
+<p>to test your code.</p>
+<p>You may call your function <code>item_lengths</code> from within <code>longest_item</code>, but don't need to do so.</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Question-5:-Weeks">Question 5: Weeks<a class="anchor-link" href="#Question-5:-Weeks">¶</a></h3><p>Complete the function <code>weeks</code> in <code>algo.py</code>. The function takes as argument two different integers in the range 1-365. The numbers represent days in the same year. The function calculates the difference between the two days in weeks and returns that value For example, the difference between days 28 and 3 is 3 full weeks (and 4 additional days)</p>
-<p>Hint: recall the mathematical operator <code>100 // 3</code> from Session 1.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [6]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">weeks</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">second</span><span class="p">):</span>
+<h2 id="Errors-and-debugging">Errors and debugging<a class="anchor-link" href="#Errors-and-debugging">¶</a></h2><p>By now, you may have become quite familiar with some of Python's error messages. You may have also have spent time trying to figure out why your program produces a specific error, or does not produce the correct result. These are called bugs and the process of finding and fixing them is called debugging.</p>
+<p>Fortunately, Python is quite is expressive in dealing with errors, telling us what went wrong and where this happened in our code. Together with the fact that Python code is interpreted line by line, this expressiveness makes finding and dealing with code errors convenient compared to many other languages.</p>
+<p>When an error occurs, the Python interpreter tries to give us as much information as possible about the error. For instance, consider the following code:</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">text</span> <span class="o">=</span> <span class="s1">'hello'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
+<span class="o">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span>                                 <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">7</span><span class="o">-</span><span class="mi">60</span><span class="n">ea18b6f15e</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="o">----&gt;</span> <span class="mi">1</span> <span class="nb">print</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
+
+<span class="ne">NameError</span><span class="p">:</span> <span class="n">name</span> <span class="s1">'txt'</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">defined</span>
+</pre></div>
+<p>The first line shows that our instruction <code>print(txt)</code> returned a <em>NameError</em>, which quite explicitly tells us that something is wrong with the variable name.  The <em>Traceback</em> then points to the line at which the error occurred. Here the code was run in the console. If we were running a complex program, it would point to the specific line in the script file. Finally, details about the <code>NameError</code> are given, here, <code>name 'txt' is not defined</code>.</p>
+<p>This is a fairly simple case, the name is misspelt (<code>txt</code> instead of <code>text</code>). Of course, if we would have declared the <code>txt</code> before this for some other purpose, the error wouldn't have been raised - we would have printed the value of that variable.</p>
+<p>Another example of error occurs when we attempt invalid operations, such as adding an integer to, say, a string (of characters):</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="s1">'a little string of size '</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s1">'This is '</span> <span class="o">+</span> <span class="n">s</span> <span class="o">+</span> <span class="s1">'.'</span>
+<span class="s1">'This is a little string of size.'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">s</span> <span class="o">+</span> <span class="mi">26</span>
+<span class="o">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span>                                 <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">1</span><span class="n">ffac3e9a4d8</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="o">----&gt;</span> <span class="mi">1</span> <span class="n">s</span> <span class="o">+</span> <span class="mi">26</span>
+
+<span class="ne">TypeError</span><span class="p">:</span> <span class="n">Can</span><span class="s1">'t convert '</span><span class="nb">int</span><span class="s1">' object to str implicitly</span>
+</pre></div>
+<p>Again, Python is explicit about the problem with converting types.</p>
+<p>These kind of bugs are easy to spot as the program crashes. But often bugs are more difficult to spot: the program may run through but produce an incorrect result. Or it may perhaps work in the most common input cases, but fail spectacularly for other less common cases. Such glitches can potentially cause a lot of damage, as examples of stock-trading algorithm malfunctions show.</p>
+<p>Debugging is connected to the broader process of <em>testing</em> your program. The purpose of testing is to find any bugs that might exist. This involves running your program for various inputs and checking whether the behaviour is as intended. When designing complex programs, this process starts with the design of the program, and plays an important role in the modularization of the program into smaller parts, such that the functioning of each can be tested separately from the rest.</p>
+<p>Program testing is a deep topic and we will not go into much detail here; you can read more in Guttag's Chapter 6.1. The key, for our purposes, is finding a set of inputs that you believe would be very likely to catch most problems in your program, much like our OK tests. So for example, if calculating the absolute value of a number, you might require tests with both positive and negative numbers, and perhaps zero, and reasonably believe that this would capture most errors.</p>
+<div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">abs_value</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Calculates the number of full weeks between the two inputs. Either input may be higher.</span>
+<span class="sd">    Returns absolute value of parameter x</span>
 <span class="sd">    </span>
-<span class="sd">    Parameters:</span>
-<span class="sd">    first, second: integers in the range 1-365, first != second.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        full weeks between the two numbers</span>
-
 <span class="sd">    Example use:</span>
-<span class="sd">    &gt;&gt;&gt; weeks(20, 1)</span>
+<span class="sd">    &gt;&gt;&gt; abs_value(2)</span>
 <span class="sd">    2</span>
-<span class="sd">    &gt;&gt;&gt; weeks(1, 21)</span>
-<span class="sd">    2</span>
-<span class="sd">    &gt;&gt;&gt; weeks(346, 281)</span>
-<span class="sd">    9</span>
+<span class="sd">    &gt;&gt;&gt; abs_value(-1)</span>
+<span class="sd">    1</span>
+<span class="sd">    &gt;&gt;&gt; abs_value(0)</span>
+<span class="sd">    0</span>
 <span class="sd">    """</span>
-    <span class="c1"># DON'T CHANGE ANYTHING ABOVE</span>
-    <span class="c1"># YOUR CODE HERE</span>
+    <span class="c1"># code here</span>
 </pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>You can test your implementation with</p>
-<pre><code>python ok -q weeks
+<blockquote>
+<p><strong>Advanced</strong> This type of tests specified within the function are called <em>doctests</em>. You can run doctests for the file <code>file_name.py</code> using the following command on the command line:</p>
+</blockquote>
+<pre><code>python -m doctest -v file_name.py
 </code></pre>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>In the exercises below you can compare Heron's algorithm to another algorithm for finding the square root.</p>
-<h3 id="Function-recap">Function recap<a class="anchor-link" href="#Function-recap">¶</a></h3><p>Functions are very useful because they</p>
-<ul>
-<li>Allow us to write a set of commands once and execute them whenever needed. This means that we can save a lot of time and effort when writing larger programs.</li>
-<li>Create useful abstractions. Once the function works, we don't care about the code inside the function anymore - we just use it by calling it. This means that we can write small parts of programs and use them to create larger programs We have been using this idea every time we use Python's built-in functions like <code>print</code>: we've never actually looked at the code behind the function. We've been able to assume it works correctly, and use it to build more complicated programs.</li>
-<li>Make it easier to change our code, by being modular. Whenever we want to change our code, we only need to do it in one place only, and it will work similarly every time the function is called. Without functions, we would have to make the same changes in multiple places in our programs, making us more vulnerable to bugs and mistakes.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Designing-functions">Designing functions<a class="anchor-link" href="#Designing-functions">¶</a></h3><p>Functions are key components of our programs. They typically solve a specific problem, and can then be used by other parts of our program. When starting to write a function, we find it useful to start by stating out what we want the function to do. This could be for example, "convert temperature from Fahrenheit to Celsius to two decimals". We'd like to give the function a name that gives a clear indication of this purpose, and a comment which states this more clearly. So we start out writing:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [9]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">fahrenheit_to_celsius</span><span class="p">(</span><span class="n">fahrenheit</span><span class="p">):</span>
+<blockquote>
+<p>In VS Code, you can quickly run your doctests with an extension called <code>Python DoctestBtn</code>. Open the <strong>Extensions</strong> panel on the left side bar of VS Code, and search for the extension. Once installed, you should see a new button beside the normal <strong>Play</strong> button, which will run your doctests. (Your code must be free of errors for this to work.)</p>
+</blockquote>
+<p>When working on a program and testing it on some input, we may then run into a problem: either there's an error, as in the above simple examples, or the program produces the wrong result.</p>
+<p>Let's look at an example. Suppose we're working on the piece of code to calculate percentage changes. Here we haven't written any tests for our code yet.</p>
+<p>This code looks like it should work:</p>
+<div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">pct_change</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Converts temperature from Fahrenheit to Celsius to two decimals.</span>
-<span class="sd">    """</span>
-    <span class="k">pass</span>
-
-<span class="n">help</span><span class="p">(</span><span class="n">fahrenheit_to_celsius</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Help on function fahrenheit_to_celsius in module __main__:
-
-fahrenheit_to_celsius(fahrenheit)
-    Converts temperature from Fahrenheit to Celsius to two decimals.
-
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Here, <code>pass</code> is a keyword used as a placeholder for code we haven't written yet. As we noted above, the comment within triple quotes directly following the function definition is called a <em>docstring</em>. Docstrings are commonly used to describe functions to make them convenient for others to use. Using the command</p>
-<div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">fahrenheit_to_celsius</span><span class="p">)</span>
-</pre></div>
-<p>will print out this docstring, telling a prospective user what the function does.</p>
-<p>The next step is determining what the function should do, i.e. what its output should be for different inputs. If we look up the conversion formula, we can use it to calculate what the result should be, for example</p>
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">fahrenheit_to_celsius</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="o">-</span><span class="mf">12.22</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">fahrenheit_to_celsius</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">)</span>
-<span class="o">-</span><span class="mf">28.89</span>
-</pre></div>
-<p>It's useful to add these code examples to the docstring to make the output clear to users. We also often want to clarify the types of input and output of the function, as follows:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [19]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">fahrenheit_to_celsius</span><span class="p">(</span><span class="n">fahrenheit</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Converts temperature from Fahrenheit to Celsius to two decimals.</span>
+<span class="sd">    Calculates per-period percentage changes (returns)</span>
 <span class="sd">    </span>
 <span class="sd">    Parameters:</span>
-<span class="sd">    fahrenheit: temperature in fahrenheit</span>
-<span class="sd">    </span>
-<span class="sd">    Returns:</span>
-<span class="sd">    temperature in celsius</span>
-<span class="sd">    </span>
-<span class="sd">    Example use:</span>
-<span class="sd">    &gt;&gt;&gt; fahrenheit_to_celsius(10)</span>
-<span class="sd">    -12.22</span>
-<span class="sd">    &gt;&gt;&gt; fahrenheit_to_celsius(-20)</span>
-<span class="sd">    -28.89</span>
+<span class="sd">        L: a list of numbers </span>
+<span class="sd">      </span>
+<span class="sd">    Returns a new list of percentage changes</span>
 <span class="sd">    """</span>
-    <span class="k">pass</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Now, after specifying what the function <em>should</em> do, we are ready to write the program to give us the desired result.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [1]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">fahrenheit_to_celsius</span><span class="p">(</span><span class="n">fahrenheit</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Converts temperature from Fahrenheit to Celsius to two decimals.</span>
-<span class="sd">    </span>
-<span class="sd">    Parameters:</span>
-<span class="sd">    fahrenheit: temperature in fahrenheit</span>
-<span class="sd">    </span>
-<span class="sd">    Returns:</span>
-<span class="sd">    temperature in celsius</span>
-<span class="sd">    </span>
-<span class="sd">    Example use:</span>
-<span class="sd">    &gt;&gt;&gt; fahrenheit_to_celsius(10)</span>
-<span class="sd">    -12.22</span>
-<span class="sd">    &gt;&gt;&gt; fahrenheit_to_celsius(-20)</span>
-<span class="sd">    -28.89</span>
-<span class="sd">    """</span>
-    <span class="n">celsius</span> <span class="o">=</span> <span class="p">(</span><span class="n">fahrenheit</span> <span class="o">-</span> <span class="mi">32</span><span class="p">)</span><span class="o">*</span><span class="mi">5</span><span class="o">/</span><span class="mi">9</span>
-    <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">celsius</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-
-<span class="n">fahrenheit_to_celsius</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[1]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>-28.89</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>In practice, the process of solving computational and data problems is exploratory, messy, and highly nonlinear. It therefore often involves playing around with code to figure things out before the solution gets organized into functions. But having spent some extra time in organizing your code into functions and documenting it can be very valuable when you share it with others, or return to it later.</p>
-<p>The larger the programming project, the more important this organization and documentation becomes.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Further-exercises">Further exercises<a class="anchor-link" href="#Further-exercises">¶</a></h2><h3 id="Question-6:-Middle-of-three">Question 6: Middle of three<a class="anchor-link" href="#Question-6:-Middle-of-three">¶</a></h3><p>Complete the function <code>middle_of_three</code> in the file <code>algo_extra.py</code>. You can test the your solution with</p>
-<pre><code>python ok -q middle_of_three
-</code></pre>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Question-7:-Sum-up-to">Question 7: Sum up to<a class="anchor-link" href="#Question-7:-Sum-up-to">¶</a></h3><p>Complete the function <code>sum_up_to</code> in the file <code>algo_extra.py</code>. You can test the your solution with</p>
-<pre><code>python ok -q sum_up_to
-</code></pre>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Question-8:-Faster-than-Heron?">Question 8: Faster than Heron?<a class="anchor-link" href="#Question-8:-Faster-than-Heron?">¶</a></h3><p>During the lecture, we used Heron's square root algorithm to find square roots. It looked like in that case it was quite quick to converge to the solution. But how quick is it actually?</p>
-<p>In <code>algo_extra.py</code>, you will find two algorithms for calculating the square root of a number: Heron's algorithm and bisection search. Your task is to compare how quickly they find the solution.</p>
-<p>First, update Heron's algorithm so that it counts the number of iterations it does, and returns the count along with the square root value. You'll need to add a variable that increases in value at each iteration, and return it together with the result.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">square_root_heron</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">0.01</span><span class="p">):</span>     
-<span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Find square root using Heron's algorithm</span>
-<span class="sd">    </span>
-<span class="sd">    Parameters:</span>
-<span class="sd">    x: integer or float</span>
-<span class="sd">    epsilon: desired precision, </span>
-<span class="sd">        default value epsilon = 0.01 if not specified</span>
-<span class="sd">    </span>
-<span class="sd">    Returns:</span>
-<span class="sd">        the square root value, rounded to two decimals,</span>
-<span class="sd">        the number of iterations the algorithm ran</span>
-<span class="sd">    </span>
-<span class="sd">    Example use:</span>
-<span class="sd">    &gt;&gt;&gt; y, c = square_root_heron(20)</span>
-<span class="sd">    &gt;&gt;&gt; print(y, c)</span>
-<span class="sd">    4.47 4</span>
-<span class="sd">    """</span>
-    <span class="c1"># DON'T CHANGE ANYTHING ABOVE</span>
-    <span class="c1"># UPDATE CODE BELOW THIS</span>
+    <span class="n">pct_change_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)):</span>
+        <span class="n">change</span> <span class="o">=</span> <span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span><span class="o">-</span><span class="n">L</span><span class="p">[</span><span class="n">ind</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="n">L</span><span class="p">[</span><span class="n">ind</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">pct_change_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">change</span><span class="p">)</span>
     
-    <span class="n">guess</span> <span class="o">=</span> <span class="n">x</span><span class="o">/</span><span class="mi">2</span> <span class="c1"># Make initial guess</span>
-    <span class="c1"># Loop until squared value of guess is close to x</span>
-    <span class="k">while</span> <span class="nb">abs</span><span class="p">(</span><span class="n">guess</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">epsilon</span><span class="p">:</span>
-        <span class="n">guess</span> <span class="o">=</span> <span class="p">(</span><span class="n">guess</span> <span class="o">+</span> <span class="n">x</span><span class="o">/</span><span class="n">guess</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="c1"># Update guess using Heron's formula</span>
-    <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">guess</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="o">...</span>
+    <span class="k">return</span> <span class="n">pct_change_list</span>
+
+<span class="c1"># test with a specific input</span>
+<span class="n">pct_change</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
 </pre></div>
-</div>
+<p>What should happen with our test? If we calculate the percentage changes by hand, the first change should be -50% (from 4 to 2), then the second again -50% (from 2 to 1), and then 100% (from 1 to 2).</p>
+<p>But the result we now get is this:</p>
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
+</pre></div>
+<p>We have four values instead of three, and the first value is 100% (1.0 is equal to 100%)!</p>
+<p>Let's try to debug the problem. Often, the first debugging step is <strong>adding a print statement</strong> to understand what our program is actually doing. Here, it looks like the variable <code>change</code> is somehow calculated wrong. So, let's print out some details on how it is calculated.</p>
+<div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">pct_change</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Calculates per-period percentage changes (returns)</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">        L: a list of numbers </span>
+<span class="sd">      </span>
+<span class="sd">    Returns a new list of percentage changes</span>
+<span class="sd">    """</span>
+    <span class="n">pct_change_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'ind'</span><span class="p">,</span> <span class="n">ind</span><span class="p">,</span> <span class="s1">'L[ind-1]'</span><span class="p">,</span> <span class="n">L</span><span class="p">[</span><span class="n">ind</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s1">'L[ind]'</span><span class="p">,</span> <span class="n">L</span><span class="p">[</span><span class="n">ind</span><span class="p">])</span>
+        <span class="n">change</span> <span class="o">=</span> <span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span><span class="o">-</span><span class="n">L</span><span class="p">[</span><span class="n">ind</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="n">L</span><span class="p">[</span><span class="n">ind</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">pct_change_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">change</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">pct_change_list</span>
+</pre></div>
+<p>Now, we get the following output:</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">pct_change</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">ind</span> <span class="mi">0</span> <span class="n">L</span><span class="p">[</span><span class="n">ind</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="mi">2</span> <span class="n">L</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span> <span class="mi">4</span>
+<span class="n">ind</span> <span class="mi">1</span> <span class="n">L</span><span class="p">[</span><span class="n">ind</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="mi">4</span> <span class="n">L</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span> <span class="mi">2</span>
+<span class="n">ind</span> <span class="mi">2</span> <span class="n">L</span><span class="p">[</span><span class="n">ind</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="mi">2</span> <span class="n">L</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span> <span class="mi">1</span>
+<span class="n">ind</span> <span class="mi">3</span> <span class="n">L</span><span class="p">[</span><span class="n">ind</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="mi">1</span> <span class="n">L</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span> <span class="mi">2</span>
+<span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
+</pre></div>
+<p>At index 0, the calculation is wrong: it calculates the difference from 2 to 4. That is, when we access <code>L[ind-1]</code> at <code>ind=0</code>, we're accessing <code>L[-1]</code>, which is the <em>last value of the list</em>. So, we're calculating the change from the last to the first value, which does not make sense here.</p>
+<p>One way to fix this is by a condition. We'll say that our program should not make the calculation at index zero, but produce the value <code>None</code> instead. THen, it should work.</p>
+<div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">pct_change</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Calculates per-period percentage changes (returns)</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">        L: a list of numbers </span>
+<span class="sd">      </span>
+<span class="sd">    Returns a new list of percentage changes</span>
+<span class="sd">    """</span>
+    <span class="n">pct_change_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">ind</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">change</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">change</span> <span class="o">=</span> <span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span><span class="o">-</span><span class="n">L</span><span class="p">[</span><span class="n">ind</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="n">L</span><span class="p">[</span><span class="n">ind</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">pct_change_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">change</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pct_change_list</span>
+</pre></div>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Test your changes with</p>
-<pre><code>python ok -q square_root_heron
+<h3 id="Debugging-in-VS-Code">Debugging in VS Code<a class="anchor-link" href="#Debugging-in-VS-Code">¶</a></h3><p>Sometimes adding print statements is not enough to figure out the problem in the code. We can then use VS Code's built-in debugging facilities.</p>
+<p>Let's try this by creating a new empty Python script file and copying the code above to the file. Then save the file and give it a name of your choice, for example <code>debug_test.py</code>.</p>
+<p>VS Code has a debug option: we can start debugging the file by using the drop-down menu on the play icon we use to run our file - choose <code>Python Debugger: Debug Python File</code>.</p>
+<p>Nothing happens immediately, because there are no explicit errors in our code. To tell VS Code that we want to debug specific parts of our code, we use <code>breakpoints</code>. You can insert a breakpoint by clicking just left of the line number in your <code>.py</code> file. This will insert a red dot at that line.</p>
+<p>First, insert a breakpoint at the following line of code (by clicking left of the line number in your <code>debug_test.py</code> file).</p>
+<div class="highlight"><pre><span></span><span class="n">pct_change</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+</pre></div>
+<p>Then click <code>Debug Python File</code> again. This time, our code will run until it hits the breakpoint and then pause. You will see a new panel appear near the middle-top of the editor with these options:</p>
+<ul>
+<li>Continue: Run the rest of the code until the next breakpoint or error.</li>
+<li>Step Over: Run the current line of code only. If the line calls a function, do not enter into it.</li>
+<li>Step Into: Run the current line of code only. If the line calls a function, enter into it.</li>
+<li>Step Out: Run the rest of the function until it returns.</li>
+<li>Restart: Restart the debugging process from the top of the code.</li>
+<li>Stop: Stop execution.</li>
+</ul>
+<p>You will also see a panel on the left to keep track of what is happening as the code runs. The <strong>Variables</strong> section of this panel is the one to keep your eye on.</p>
+<p>Let's <em>step into</em> the function. This moves the execution point inside the function, where we can move line by line with <em>step into</em>. This will manipulate the variables as we go along. Stepping into functions like this is useful for seeing what happens inside our code and what may be causing an error. The VS Code variable explorer on the top left hand side of the window will show you the values and types of the variables at any given point in time. This can be very useful for spotting problems. We can stop the debugger with the stop button.</p>
+<p>The value of debugging is being able to step through the code and seeing how the variables change and where the problem occurs.</p>
+<p>Debugging is a skill that takes a while to learn. Some common types of bugs include:</p>
+<ul>
+<li>Referring to a wrong variable name</li>
+<li>Passing arguments to a function in the wrong order</li>
+<li>List indexing</li>
+<li>Mixing list values and indices when looping</li>
+<li>Forgetting parentheses () when calling a function - this will just refer to the function object</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Question-6:-Debugging-Practice">Question 6: Debugging Practice<a class="anchor-link" href="#Question-6:-Debugging-Practice">¶</a></h3><p>Fix the function <code>broken_factorial</code> in <code>seq_data.py</code>.</p>
+<p>Given an integer $n$, it should return the factorial $n!$, that is, multiply together the integers from 1 to $n$. However, the code does not quite work. Open the code in VS Code and use the debugger to find the mistake.</p>
+<p>In the command line, type in the following command:</p>
+<pre><code>python ok -q broken_factorial
 </code></pre>
-<p>Next, you'll compare Heron's approach with another classic algorithm called bisection search.</p>
-<p>The idea is simple: we know that the square root of a number $x$ is somewhere between $0$ and $x$. We make a guess: the square root is the midpoint of this range. Like with Heron, if the guess is close enough, we stop. If the guess is too low (guess squared is lower than $x$), we know that the square root is not in the bottom half so we can only search the top half.  Otherwise, we similarly discard the top half. We then pick the midpoint of the updated range as a new guess. We repeat this until we're close enough. The procedure is called <em>bisection search</em> because it halves the search area at each iteration.</p>
-<p>For example, to find the square root of 10, our first guess in the search range $[0,10]$ would be $(10+0)/2=5$. Since this guess is too high ($5^2 &gt; 10$), we would discard everything above $5$ and repeat the search in the range $[0,5]$. Our new guess would then be $2.5$...</p>
-<p>The algorithm is thus as follows:</p>
+<p>to test your code.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Review">Review<a class="anchor-link" href="#Review">¶</a></h2><ul>
+<li>We use for loops and while loops for repeating actions.</li>
+<li>Python <em>data types</em> like strings and lists combine data with methods that work specifically on that kind of data.</li>
+<li>Lists are a commonly used and flexible ordered compound data type in Python.</li>
+<li>Both strings and lists have a number of methods that make coding much easier.</li>
+</ul>
+<p>How would you explain to a classmate:</p>
 <ul>
-<li>Start with a guess $g$ as average of search range $low=0$ and $high=\max\{1.0,x\}$</li>
-<li>If $g\cdot g$ is close to $x$, stop and return $g$ as the answer</li>
-<li>Otherwise, if $g \cdot g &lt; x$, update search range: $low = g$,</li>
-<li>Otherwise, if $g \cdot g &gt;= x$, update search range: $high = g$</li>
-<li>Make new guess as average of updated search range</li>
-<li>Repeat process using new guess until close enough</li>
+<li>How does a for loop work in Python? How about a while loop?</li>
+<li>How can we loop through lists of items?</li>
+<li>What is slicing?</li>
+<li>What are methods and how do we use them?</li>
 </ul>
-<p>Let's think about these steps in terms of how we could translate them into a while loop. After the initial guess, we have actions that are repeated as long as a condition is met. We can write this as a while loop as follows.</p>
-<ul>
-<li>Start with a guess $g$ as average of search range $low=0$ and $high=\max\{1.0,x\}$</li>
-<li>While $g \cdot g$ is not "close" to $x$:<ul>
-<li>If $g \cdot g &lt; x$, update search range: $low = g$,</li>
-<li>If $g \cdot g &gt;= x$, update search range: $high = g$</li>
-<li>Make new guess as average of updated search range $\{low,high\}$</li>
-</ul>
-</li>
-<li>When the while loop finishes, return the final guess</li>
-</ul>
-<p>Your task now is to complete the Python function in the file to match these steps.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Further-Exercises">Further Exercises<a class="anchor-link" href="#Further-Exercises">¶</a></h1><h2 id="Trump-tweets-and-libraries">Trump tweets and libraries<a class="anchor-link" href="#Trump-tweets-and-libraries">¶</a></h2><p>In the following exercises, we will apply the ideas we have learned through a concrete example. US President Donald Trump used Twitter prolifically during his campaigning and presidency, forming a complicated relationship with the platform. The file <code>trump_tweets.csv</code> contains a set of his tweets up to July 2016 collected by Github user <a href="https://github.com/sashaperigo/Trump-Tweets">sashaperigo</a>.</p>
+<p>The data are in <code>csv</code> format, which stands for "comma-separated values". A csv file is much like a table, and we could open it in Microsoft Excel. But let's read the data into Python. For this, we'll need to use a Python <em>library</em>.</p>
+<p>We have previously used some of Python's built-in functions, like <code>print</code> and <code>abs</code>. In fact, our Python installation comes with a vast number of readymade functions that we can use. But because of the sheer number of options, most of these are not made immediately available like <code>print</code>, but stored in libraries that we <em>import</em> as we need them.</p>
+<p>For the case at hand, Python has built-in functions for reading csv files. They are stored in a library called <code>csv</code>. When we need these functions, we use the command <code>import csv</code>, which makes the functions available for use.</p>
+<p>Find the function <code>read_trump_tweets</code> in the file. We will use this function to load the data to analyse. It takes as argument the name of the csv file containing the tweets. Our file is trump_tweets.csv, so type in the console:</p>
+<div class="highlight"><pre><span></span><span class="n">tweets</span> <span class="o">=</span> <span class="n">read_trump_tweets</span><span class="p">(</span><span class="s1">'trump_tweets.csv'</span><span class="p">)</span>
+</pre></div>
+<p>This will read the tweets into a list. Here's the code we use for reading Trump's tweets into a list. We'll return to the details of reading and writing files later in the module. For now, we're happy just to use the end result.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">def</span><span class="w"> </span><span class="nf">read_trump_tweets</span><span class="p">(</span><span class="n">file_name</span><span class="p">):</span>
+<span class="o">...</span>     <span class="s2">"""</span>
+<span class="s2">...     Reads Trump tweets csv file into a list</span>
+<span class="s2">...     """</span>
+<span class="o">...</span>     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span>
+<span class="o">...</span>         <span class="n">data</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">csvfile</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">','</span><span class="p">)</span>
+<span class="o">...</span>         <span class="n">tweet_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="o">...</span>     <span class="k">return</span> <span class="n">tweet_list</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">tweets</span> <span class="o">=</span> <span class="n">read_trump_tweets</span><span class="p">(</span><span class="s1">'trump_tweets.csv'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's see what's in the list by printing out the first couple of lines. Run the following code in the console:</p>
 </div>
 </div>
 </div>
@@ -13794,37 +14233,381 @@ fahrenheit_to_celsius(fahrenheit)
 <div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">square_root_bisection</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">0.01</span><span class="p">):</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">tweets</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1"># headers</span>
+<span class="k">for</span> <span class="n">tweet</span> <span class="ow">in</span> <span class="n">tweets</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">]:</span> <span class="c1"># first tweets: do not repeat the header line, so index from 1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">tweet</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The first line is a list containing headers, and the next lines have the corresponding elements for the first tweets. Now let's analyse the tweets.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Question-7:-Tweet-analysis">Question 7: Tweet analysis<a class="anchor-link" href="#Question-7:-Tweet-analysis">¶</a></h3><p>1 - Looking at the first tweets, we see that the values of Favorites and Retweets are integers, but they are in string form in the list. Complete the function <code>str_to_int</code> in <code>seq_data_extra.py</code> to convert them to integers in Python. Test your implementation with</p>
+<div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">ok</span> <span class="o">-</span><span class="n">q</span> <span class="n">str_to_int</span>
+</pre></div>
+<p>The function should return a new list with just the integer values of each item at a desired index. You'll need to create a new list, loop through the elements of the input list, and append values to the new list in the loop. You can create an empty list using <code>new_list = []</code>.</p>
+<p>Recall from above that you can loop through elements of a list with</p>
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">L</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span> <span class="c1"># this will print each element in L in order</span>
+</pre></div>
+<p>To effect the conversions, run the following commands in the console:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">favorites</span> <span class="o">=</span> <span class="n">str_to_int</span><span class="p">(</span><span class="n">tweets</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">retweets</span> <span class="o">=</span> <span class="n">str_to_int</span><span class="p">(</span><span class="n">tweets</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>2 - Having converted the integer columns, let's look at the most popular tweets. Complete the function <code>value_at_least</code> in <code>seq_data_extra.py</code> to find the tweets with at least a specific number of retweets. Test your implementation with</p>
+<div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">ok</span> <span class="o">-</span><span class="n">q</span> <span class="n">value_at_least</span>
+</pre></div>
+<p><strong>Hint</strong>: In writing this function, we care about the indices of the underlying list. To loop through list indices, use</p>
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">L</span><span class="p">[</span><span class="n">index</span><span class="p">])</span> <span class="c1"># this will print out the index and the corresponding element</span>
+</pre></div>
+<p>To test the function on the tweet data, run the following commands in the console. Test with different thresholds. What are the tweets about?</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">high_retweets</span> <span class="o">=</span> <span class="n">value_at_least</span><span class="p">(</span><span class="n">retweets</span><span class="p">,</span> <span class="mi">20000</span><span class="p">)</span> <span class="c1"># get tweet indixes with high number of retweets</span>
+<span class="k">for</span> <span class="n">tw_ind</span> <span class="ow">in</span> <span class="n">high_retweets</span><span class="p">:</span> <span class="c1"># print the text at these indices</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">tweets</span><span class="p">[</span><span class="n">tw_ind</span> <span class="o">+</span> <span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="More-on-Functions">More on Functions<a class="anchor-link" href="#More-on-Functions">¶</a></h2><p>We've learned to use functions as names for groups of statements to perform a specific task. For example, we might define a function to calculate the squared value of a number.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">square</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Defining the function allows us to give a name to the process obtain the square. With the function, we can abstract from the details of the implementation and focus on the concept of squaring, which we can now repeat for any number. Now we're going to build on this idea to create functions that manipulate other functions to build higher-order abstractions.</p>
+<p>Suppose we want to create a list of the squared and cubed values of the natural numbers up to <code>n</code>. We could do the following.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">create_list_squares</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">num_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">num_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">number</span><span class="o">*</span><span class="n">number</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">num_list</span>
+        
+<span class="k">def</span><span class="w"> </span><span class="nf">create_list_cubes</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">num_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">num_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">number</span><span class="o">*</span><span class="n">number</span><span class="o">*</span><span class="n">number</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">num_list</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This is repetitive. They are more or less the same function, just with different calculations. Because the functions share a common pattern, we can create an abstraction: each function creates a list of terms, but applying a different calculation. We do this by making the specific calculation an argument to the function.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">create_list_calc</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
+    <span class="n">num_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">num_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="n">number</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">num_list</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">square</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span>
+
+<span class="n">square_list</span> <span class="o">=</span> <span class="n">create_list_calc</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">square</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The function now takes two arguments: the number up to which we create the list, and the function that we use in the calculation. Functions, just like lists, integers, and strings, are objects in Python, meaning we can use them as parameters. Here we define the square function and pass it as an argument to create_list_calc. When the latter is executed, it will call the function square with each number from zero through four.</p>
+<p>We could now define any calculation on a number, and create a list applying the calculation.</p>
+<p><strong>We can also define local functions within another function.</strong> This works just like defining a local variable inside a function. This is sometimes convenient if we don't need the function globally, but only briefly within another function. Another use is that sometimes we may wish to use a function to generate new functions.</p>
+<p>Let's look at an example. The function <code>power_creator</code> defines and returns a new function that calculates the power of a number. The parameter of the power_creator is n, which we use in the definition as the power that we'd like the new function to calculate.</p>
+<p>We can use <code>power_creator</code> to generate functions to calculate different powers. Each time we call it, it defines a new function with the argument we give, and returns it. We can then call the resulting function, which calculates the squares, or the cubes, of whatever the argument we give it.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">power_creator</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="n">n</span>
+    <span class="k">return</span> <span class="n">f</span> 
+
+<span class="n">square</span> <span class="o">=</span> <span class="n">power_creator</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">square</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">cube</span> <span class="o">=</span> <span class="n">power_creator</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cube</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>User-defined functions are powerful because they allow us to create abstractions. We can take a procedure, an algorithm, and give it a name, adding it to our programming language. We can then use our functions to express more complex operations, calculations, and patterns. Here we've seen two a bit more advanced examples of how we can manipulate functions: we can use them as arguments to other functions, and return them as results of other functions.</p>
+<p>Let us now practice some real-world problem solving using these concepts.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="More-on-tweets">More on tweets<a class="anchor-link" href="#More-on-tweets">¶</a></h2><p>Let's think about tweets again. They are contained in lists within a list, and there are many computations we might want to apply to each of the tweets in the list. Just now, we looped through to do some conversions. Examples could include finding hashtags or mentions, or counting the number of capital letters used. With the idea of using a function as an argument, we can create a function that applies any function to each item in a list, and then throw different actions at this function.</p>
+<p>Below is a function that applies a function on a list, <code>apply_function</code>, which you can find in <code>seq_data_extra.py</code>.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">apply_function</span><span class="p">(</span><span class="n">a_list</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">start_from</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Find square root using bisection search</span>
+<span class="sd">    Applies parameter function to items of a_list. </span>
 <span class="sd">    </span>
 <span class="sd">    Parameters:</span>
-<span class="sd">    x: integer or float</span>
-<span class="sd">    epsilon: desired precision, </span>
-<span class="sd">        default value epsilon = 0.01 if not specified</span>
+<span class="sd">        a_list: a list of lists</span>
+<span class="sd">        function: a function to be applied to each item of a_list,</span>
+<span class="sd">        start_from: index of a_list to start from</span>
+
+<span class="sd">    Returns: </span>
+<span class="sd">        a new list with the results.</span>
+<span class="sd">    """</span>
+    <span class="n">new_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">a_list</span><span class="p">[</span><span class="n">start_from</span><span class="p">:]:</span>
+        <span class="n">new_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">function</span><span class="p">(</span><span class="n">item</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">new_list</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>For example, we could define the following function to get the length of the tweet text.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">tweet_length</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">tweet</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Then we can use <code>apply_function</code> to add this data to our list.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">tw_lengths</span> <span class="o">=</span> <span class="n">apply_function</span><span class="p">(</span><span class="n">tweets</span><span class="p">,</span> <span class="n">tweet_length</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If we wanted to add this data to our <code>tweets</code> list, we could loop through it to append this information.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Question-8:-Counting-capitals">Question 8: Counting capitals<a class="anchor-link" href="#Question-8:-Counting-capitals">¶</a></h3><p>Let's write another function to apply to our data, this time counting the capital letters in the tweet. Complete the function <code>count_capital_letters</code> in <code>seq_data_extra.py</code>. You can use</p>
+<pre><code>python ok -q count_capital_letters
+</code></pre>
+<p>to test your implementation.</p>
+<p><strong>Hint:</strong> the tweet text string is contained in the first element of the list. Loop through the string and use the string method <code>string.isupper()</code> to check if each character is uppercase. The method works like this:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="s1">'Hello'</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">char</span><span class="o">.</span><span class="n">isupper</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To create the list of capital letter counts in the tweet data, run the following command in the console.</p>
+<div class="highlight"><pre><span></span><span class="n">capital_counts</span> <span class="o">=</span> <span class="n">apply_function</span><span class="p">(</span><span class="n">tweets</span><span class="p">,</span> <span class="n">count_capital_letters</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+<p>How can we now check which tweets that have high capital letter counts? One way to do so would be to run our previous function <code>value_at_least</code>.</p>
+<p>The advantage of <code>apply_function</code> is that we could now write many other functions to work similarly to <code>count_capital_letters</code>. You might try for example counting hashtags, mentions, specific words, etc.</p>
+<p>We will learn about more Python data structures in the coming sessions. Building on the ideas introduced today, these will allow us to conveniently do much more powerful data analysis.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Note:-Advanced-Looping">Note: Advanced Looping<a class="anchor-link" href="#Note:-Advanced-Looping">¶</a></h3><p>The above looping methods allow us to go through any data. For some cases, Python provides more convenient advanced built-in methods to do so.</p>
+<p>When looping through a list in Python we often need to keep track of the index. This can be done like this:</p>
+<div class="highlight"><pre><span></span><span class="n">some_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="s1">'joe'</span><span class="p">,</span><span class="mi">875</span><span class="p">,</span><span class="s1">'76'</span><span class="p">]</span> 
+
+<span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">some_list</span><span class="p">:</span>
+   <span class="nb">print</span><span class="p">(</span><span class="s1">'The value is:'</span><span class="p">,</span><span class="n">item</span><span class="p">,</span><span class="s1">', the index is:'</span><span class="p">,</span><span class="n">index</span><span class="p">)</span>
+   <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+       
+</pre></div>
+<p>Nevertheless this is not a <em>'pythonic'</em> way to do this. Python provides us with the built-in function enumerate(), which returns the index along with the value of the cell:</p>
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">some_list</span><span class="p">):</span>
+   <span class="nb">print</span><span class="p">(</span><span class="s1">'The value is:'</span><span class="p">,</span><span class="n">item</span><span class="p">,</span><span class="s1">', the index is:'</span><span class="p">,</span><span class="n">index</span><span class="p">)</span>
+       
+</pre></div>
+<p>In many cases we need to loop through two lists at the same time. Instead of using the same index for two different lists, this can be done using the built in function zip( ):</p>
+<div class="highlight"><pre><span></span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Mary'</span><span class="p">,</span> <span class="s1">'Nick'</span><span class="p">,</span> <span class="s1">'John'</span><span class="p">,</span> <span class="s1">'Sue'</span><span class="p">]</span> 
+<span class="n">grades</span> <span class="o">=</span> <span class="p">[</span><span class="mi">87</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">91</span><span class="p">]</span> 
+
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">grade</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">grades</span><span class="p">):</span> 
+   <span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="s1">' got '</span><span class="p">,</span> <span class="n">grade</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Question-9:-Palindromes">Question 9: Palindromes<a class="anchor-link" href="#Question-9:-Palindromes">¶</a></h3><p>A <em>palindrome</em> is a string that reads the same forward and backwards e.g 'radar'. Write a function that tests whether an arbitrarily long string is a palindrome. How should we go about this? How do we reverse a string? There is a hiccup though - a string might contain capital letters and punctuation. These will cause trouble in comparisons. For palindrome checking, we need to compare only lower case strings with no punctuation. Complete the functions <code>to_chars</code> and <code>is_palindrome</code> in the <code>seq_data_extra.py</code> file.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">to_chars</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Strips the string s from any non-letter characters (English alphabet), </span>
+<span class="sd">    and makes it lower-case.</span>
 <span class="sd">    </span>
-<span class="sd">    Returns:</span>
-<span class="sd">    the square root value, rounded to two decimals,</span>
-<span class="sd">    the number of iterations of the algorithm run</span>
-<span class="sd">    </span>
-<span class="sd">    Example use:</span>
-<span class="sd">    &gt;&gt;&gt; y, c = square_root_bisection(20)</span>
-<span class="sd">    &gt;&gt;&gt; print(y, c)</span>
-<span class="sd">    4.47 9</span>
+<span class="sd">    Parameters:</span>
+<span class="sd">        string s</span>
+<span class="sd">    Returns: </span>
+<span class="sd">        string with only lower-case chars of the English alphabet</span>
+<span class="sd">        </span>
+<span class="sd">    Example use</span>
+<span class="sd">    &gt;&gt;&gt; to_chars('HeLlo!')</span>
+<span class="sd">    'hello'</span>
+<span class="sd">    &gt;&gt;&gt; to_chars("Never (1) odd or (2) even...")</span>
+<span class="sd">    'neveroddoreven'</span>
 <span class="sd">    """</span>
     <span class="c1"># DON'T CHANGE ANYTHING ABOVE</span>
-    <span class="c1"># UPDATE CODE BELOW THIS</span>
+    <span class="c1"># YOUR CODE BELOW THIS</span>
+    <span class="n">alphabet</span> <span class="o">=</span> <span class="s1">'abcdefghjiklmnopqrstuvwxyz'</span> <span class="c1"># English alphabet</span>
 
-    <span class="n">low</span> <span class="o">=</span> <span class="mf">0.0</span>
-    <span class="n">high</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="c1"># Why are we doing this? What would happen for x=0.5?</span>
-    <span class="n">guess</span> <span class="o">=</span> <span class="p">(</span><span class="n">low</span> <span class="o">+</span> <span class="n">high</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="c1"># First guess at midpoint of low and high</span>
-    <span class="k">while</span> <span class="nb">abs</span><span class="p">(</span><span class="n">guess</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">epsilon</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">guess</span><span class="o">**</span><span class="mi">2</span> <span class="o">&lt;</span> <span class="n">x</span><span class="p">:</span>
-            <span class="n">low</span> <span class="o">=</span> <span class="o">...</span> <span class="c1"># update low</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">high</span> <span class="o">=</span> <span class="o">...</span> <span class="c1"># update high</span>
-        <span class="n">guess</span> <span class="o">=</span> <span class="o">...</span> <span class="c1"># new guess at midpoint of low and high</span>
-    <span class="k">return</span> <span class="o">...</span><span class="p">,</span> <span class="o">...</span>  
+
+<span class="k">def</span><span class="w"> </span><span class="nf">is_palindrome</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">""" </span>
+<span class="sd">    Palindrome checker</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">        s is string that has gone through to_chars()</span>
+<span class="sd">    </span>
+<span class="sd">    Returns True if s is palindrome, False otherwise</span>
+<span class="sd">    </span>
+<span class="sd">    Examples:</span>
+<span class="sd">    &gt;&gt;&gt; is_palindrome('neveroddoreven')</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; is_palindrome(to_chars('A man, a plan, a canal: Panama.'))</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; is_palindrome('Hello')</span>
+<span class="sd">    False</span>
+<span class="sd">    """</span>
+    <span class="c1"># DON'T CHANGE ANYTHING ABOVE</span>
+    <span class="c1"># YOUR CODE BELOW THI</span>
 </pre></div>
 </div>
 </div>
@@ -13834,54 +14617,17 @@ fahrenheit_to_celsius(fahrenheit)
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Test your changes with</p>
-<pre><code>python ok -q square_root_bisection
+<p><code>python ok -q to_chars</code></p>
+<p><code>python ok -q is_palindrome</code></p>
+<h3 id="Question-10:-Strings-within-strings">Question 10: Strings within strings<a class="anchor-link" href="#Question-10:-Strings-within-strings">¶</a></h3><p><strong>Exercise.</strong> Implement the function <code>search_word(s1, s2)</code> that takes two strings (<code>s1</code> and <code>S2</code>) and returns the longest sequence in <code>s1</code>(a substring) that also appears in <code>s2</code>. This works as follows:</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">search_word</span><span class="p">(</span><span class="s2">"searching for a substring"</span><span class="p">,</span> <span class="s2">"subway"</span><span class="p">)</span>
+    <span class="s1">'sub'</span>
+</pre></div>
+<p>Complete the function <code>search_word</code> in <code>seq_data_extra.py</code>.</p>
+<p><strong>Hint:</strong> This is a challenging exercise. You will probably need to perform nested looping...</p>
+<p>Test your implementation with</p>
+<pre><code>python ok -q search_word
 </code></pre>
-<p>How do the algorithms compare in general for different values? Why do you think that is the case?</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Question-9:-Guess-the-number-game-(no-ok-tests-for-this-exercise)">Question 9: Guess the number game (no ok tests for this exercise)<a class="anchor-link" href="#Question-9:-Guess-the-number-game-(no-ok-tests-for-this-exercise)">¶</a></h3><p>This bonus exercise brings together many of the programming concepts from the first two sessions (with a couple of new tricks too!)</p>
-<p>Starting from the code below, write a <em>Guess the number</em> game. Here's how it works. The computer draws a random (integer) number (say, between 1 and 100), and prompts the user to guess the number. If the guess is correct, the program ends. Otherwise, the program prints out "Too low" or "Too high", and prompts the user again.</p>
-<p>For example, it might work like this (for a particularly lucky guesser!):</p>
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">guess_the_number</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-
-<span class="n">Guess</span> <span class="n">a</span> <span class="n">number</span> <span class="n">between</span> <span class="mi">1</span> <span class="ow">and</span> <span class="mi">100</span><span class="p">:</span> <span class="mi">30</span>
-
-<span class="n">Too</span> <span class="n">high</span><span class="err">!</span>
-
-<span class="n">Guess</span> <span class="n">a</span> <span class="n">number</span> <span class="n">between</span> <span class="mi">1</span> <span class="ow">and</span> <span class="mi">100</span><span class="p">:</span> <span class="mi">10</span>
-
-<span class="n">Too</span> <span class="n">low</span><span class="err">!</span>
-
-<span class="n">Guess</span> <span class="n">a</span> <span class="n">number</span> <span class="n">between</span> <span class="mi">1</span> <span class="ow">and</span> <span class="mi">100</span><span class="p">:</span> <span class="mi">13</span>
-
-<span class="n">Correct</span><span class="err">!</span>
-</pre></div>
-<p>Create a new file in VS Code and save it as <code>guess_the_number.py</code>. In the file, complete this function to implement the game:</p>
-<div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">guess_the_number</span><span class="p">(</span><span class="n">min_value</span><span class="p">,</span> <span class="n">max_value</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    User must guess the value of a number between min_value and max_value</span>
-
-<span class="sd">    Parameters:</span>
-<span class="sd">        min_value, max_value (integers)</span>
-<span class="sd">    """</span>
-    <span class="c1"># YOUR CODE HERE</span>
-</pre></div>
-<p>To complete the function, you'll need to draw a random number and ask for user input. Here's how you can do it:</p>
-<div class="highlight"><pre><span></span><span class="c1"># We import a library to draw pseudorandom numbers. </span>
-<span class="c1"># We'll learn more about libraries later in the module. </span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>  
-
-<span class="c1"># draw random integer between 1 and 100</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-
-<span class="c1"># we can get user input using the input function</span>
-<span class="n">name</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">'What is your name?'</span><span class="p">)</span>
-</pre></div>
-<p>Extra part: what is a good strategy for guessing? Make the program count and return how many attempts you needed, and try a few times for numbers between 1 and 100. How would this change for 1000? What about 1 000 000?</p>
 </div>
 </div>
 </div>

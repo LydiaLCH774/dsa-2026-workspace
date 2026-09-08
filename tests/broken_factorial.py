@@ -1,14 +1,19 @@
 test = {
-  'name': 'square_root_heron',
+  'name': 'broken_factorial',
   'points': 10,
   'suites': [
     {
       'cases': [
         {
           'code': r"""
-          >>> y, c = square_root_heron(20)
-          >>> print(y, c)
-          4.47 4
+          >>> broken_factorial(0)
+          1
+          >>> broken_factorial(1)
+          1
+          >>> broken_factorial(2)
+          2
+          >>> broken_factorial(3)
+          6
           """,
           'hidden': False,
           'locked': False
@@ -16,7 +21,7 @@ test = {
       ],
       'scored': True,
       'setup': r"""
-      >>> from algo_extra import *
+      >>> from seq_data import *
       """,
       'teardown': '',
       'type': 'doctest'

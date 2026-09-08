@@ -1,15 +1,15 @@
 test = {
-  'name': 'middle_of_three',
-  'points': 10,
+  'name': 'to_chars',
+  'points': 7,
   'suites': [
     {
       'cases': [
         {
           'code': r"""
-          >>> middle_of_three(5, 3, 4)
-          4
-          >>> middle_of_three(1, 1, 2)
-          1
+          >>> to_chars('HeLlo!')
+          'hello'
+          >>> to_chars("Never (1) odd or (2) even...")
+          'neveroddoreven'
           """,
           'hidden': False,
           'locked': False
@@ -17,7 +17,7 @@ test = {
       ],
       'scored': True,
       'setup': r"""
-      >>> from algo_extra import *
+      >>> from seq_data_extra import *
       """,
       'teardown': '',
       'type': 'doctest'

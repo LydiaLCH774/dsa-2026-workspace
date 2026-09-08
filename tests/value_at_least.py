@@ -1,19 +1,16 @@
 test = {
-  'name': 'weeks',
-  'points': 15,
+  'name': 'value_at_least',
+  'points': 7,
   'suites': [
     {
       'cases': [
         {
           'code': r"""
-          >>> weeks(20, 1)
-          2
-          >>> weeks(1, 21)
-          2
-          >>> weeks(1, 22)
-          3
-          >>> weeks(346, 281)
-          9
+          >>> tw = [0, 100, 3]
+          >>> value_at_least(tw, 2)
+          [1, 2]
+          >>> value_at_least([4, 1, 5], 5)
+          [2]
           """,
           'hidden': False,
           'locked': False
@@ -21,7 +18,7 @@ test = {
       ],
       'scored': True,
       'setup': r"""
-      >>> from algo import *
+      >>> from seq_data_extra import *
       """,
       'teardown': '',
       'type': 'doctest'

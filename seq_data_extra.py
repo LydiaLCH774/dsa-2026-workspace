@@ -24,6 +24,10 @@ def read_trump_tweets(file_name):
               Change the working directory by clicking on folder icon in the top right part of the window.
               """)
 
+tweets = read_trump_tweets('trump_tweets.csv')
+#print(tweets[0]) # headers
+#for tweet in tweets[1:4]: # first tweets: do not repeat the header line, so index from 1
+    #print(tweet)
 
 ## Question 7
 
@@ -49,6 +53,10 @@ def str_to_int(L, ind):
     """
     # DON'T CHANGE ANYTHING ABOVE
     # YOUR CODE BELOW
+    return [int(row[ind]) for row in L[1:]]
+
+L = [['Name', 'Favorites'], ['Jay', '100'], ['Jack', '99']]
+y = str_to_int(L, 1)
 
 
 def value_at_least(L, threshold):
@@ -70,7 +78,7 @@ def value_at_least(L, threshold):
     """
     # DON'T CHANGE ANYTHING ABOVE
     # YOUR CODE BELOW
-
+    return [i for i,val in enumerate(L) if val >= threshold] 
 
 ## More on tweets
 # Applying functions
@@ -113,7 +121,13 @@ def count_capital_letters(tweet):
     """
     # DON'T CHANGE ANYTHING ABOVE
     # YOUR CODE BELOW
-    
+    count = 0
+
+    for letter in tweet[0]: 
+        if letter.isupper(): 
+            count +=1 
+    return count
+
 def to_chars(s):
     """
     Strips the string s from any non-letter characters (English alphabet), 
@@ -133,7 +147,7 @@ def to_chars(s):
     # DON'T CHANGE ANYTHING ABOVE
     # YOUR CODE BELOW THIS
     alphabet = 'abcdefghjiklmnopqrstuvwxyz' # English alphabet
-
+    return ''.join([c for c in s.lower() if c in alphabet])
 
 def is_palindrome(s):
     """ 
@@ -154,7 +168,13 @@ def is_palindrome(s):
     """
     # DON'T CHANGE ANYTHING ABOVE
     # YOUR CODE BELOW THIS
-
+    left = 0 
+    right = len(s) - 1
+    while left < right: 
+        if s[left] != s[right]: return False
+        left += 1
+        right -= 1
+        return True
 
 def search_word(s1, s2):
     """
@@ -180,3 +200,5 @@ def search_word(s1, s2):
     """
     # DON'T CHANGE ANYTHING ABOVE
     # YOUR CODE BELOW THIS
+    return max([s1[i:j] for i in range(len(s1)) for j in range(i+1, len(s1)+1) if s1[i:j] in s2] or [''], key=len)
+

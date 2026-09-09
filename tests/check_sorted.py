@@ -1,17 +1,17 @@
 test = {
-  'name': 'is_palindrome',
-  'points': 8,
+  'name': 'check_sorted',
+  'points': 14,
   'suites': [
     {
       'cases': [
         {
           'code': r"""
-          >>> is_palindrome('neveroddoreven')
-          True
-          >>> is_palindrome(to_chars('A man, a plan, a canal: Panama.'))
-          True
-          >>> is_palindrome('hello')
+          >>> check_sorted([3, 6, 48, 24, 51, 262, 119])
           False
+          >>> check_sorted([748, 623, 424, 414, 74, 2])
+          True
+          >>> check_sorted([1, 2, 3])
+          True
           """,
           'hidden': False,
           'locked': False
@@ -19,7 +19,7 @@ test = {
       ],
       'scored': True,
       'setup': r"""
-      >>> from seq_data_extra import *
+      >>> from complexity_search_extra import *
       """,
       'teardown': '',
       'type': 'doctest'

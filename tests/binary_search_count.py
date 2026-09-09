@@ -1,16 +1,15 @@
 test = {
-  'name': 'value_at_least',
-  'points': 7,
+  'name': 'binary_search_count',
+  'points': 15,
   'suites': [
     {
       'cases': [
         {
           'code': r"""
-          >>> tw = [0, 100, 3]
-          >>> value_at_least(tw, 2)
-          [1, 2]
-          >>> value_at_least([4, 1, 5], 5)
-          [2]
+          >>> binary_search_count([1, 3, 4, 5], -1)
+          (False, 2)
+          >>> binary_search_count([1, 3, 4, 5, 6, 6, 7], 5)
+          (True, 1)
           """,
           'hidden': False,
           'locked': False
@@ -18,7 +17,7 @@ test = {
       ],
       'scored': True,
       'setup': r"""
-      >>> from seq_data_extra import *
+      >>> from complexity_search import *
       """,
       'teardown': '',
       'type': 'doctest'

@@ -1,17 +1,15 @@
 test = {
-  'name': 'check_sorted',
+  'name': 'merge',
   'points': 14,
   'suites': [
     {
       'cases': [
         {
           'code': r"""
-          >>> check_sorted([3, 6, 48, 24, 51, 262, 119])
-          False
-          >>> check_sorted([748, 623, 424, 414, 74, 2])
-          True
-          >>> check_sorted([1, 2, 3])
-          True
+          >>> left = [1, 5, 6]
+          >>> right = [2, 3, 4]
+          >>> merge(left, right)
+          [1, 2, 3, 4, 5, 6]
           """,
           'hidden': False,
           'locked': False
@@ -19,7 +17,7 @@ test = {
       ],
       'scored': True,
       'setup': r"""
-      >>> from complexity_search_extra import *
+      >>> from sorting_extra import *
       """,
       'teardown': '',
       'type': 'doctest'

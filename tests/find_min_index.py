@@ -1,15 +1,15 @@
 test = {
-  'name': 'linear_search_index',
+  'name': 'find_min_index',
   'points': 14,
   'suites': [
     {
       'cases': [
         {
           'code': r"""
-          >>> linear_search_index([1, 3, 9, 4, 5, 6], 6)
-          5
-          >>> linear_search_index([1, 3, 9, 4, 5, 6], 2)
-          -1
+          >>> find_min_index([1, 2, 5, -1], 0)
+          3
+          >>> find_min_index([1, 1, 1, 5, 9], 2)
+          2
           """,
           'hidden': False,
           'locked': False
@@ -17,7 +17,7 @@ test = {
       ],
       'scored': True,
       'setup': r"""
-      >>> from complexity_search import *
+      >>> from sorting import *
       """,
       'teardown': '',
       'type': 'doctest'

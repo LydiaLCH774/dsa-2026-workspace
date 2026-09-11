@@ -1,15 +1,15 @@
 test = {
-  'name': 'binary_search_count',
+  'name': 'selection_sort',
   'points': 15,
   'suites': [
     {
       'cases': [
         {
           'code': r"""
-          >>> binary_search_count([1, 3, 4, 5], -1)
-          (False, 2)
-          >>> binary_search_count([1, 3, 4, 5, 6, 6, 7], 5)
-          (True, 1)
+          >>> selection_sort([3, 6, 8, 2, 78, 1, 23, 45, 9])
+          [1, 2, 3, 6, 8, 9, 23, 45, 78]
+          >>> selection_sort([1, 13, -23, 2.7, -3, 5, 7.5])
+          [-23, -3, 1, 2.7, 5, 7.5, 13]
           """,
           'hidden': False,
           'locked': False
@@ -17,7 +17,7 @@ test = {
       ],
       'scored': True,
       'setup': r"""
-      >>> from complexity_search import *
+      >>> from sorting import *
       """,
       'teardown': '',
       'type': 'doctest'
